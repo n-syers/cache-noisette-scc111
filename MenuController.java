@@ -86,6 +86,12 @@ public class MenuController implements ActionListener{
         }
         gameMenuBar.add(levelSelectorMenu);
     }
+    
+    /**
+     * This function creates a JLabel with the text string its provided with preset formats.
+     * @param titleString The text inside of the label.
+     * @return The JLabel after formatting
+     */
     public JLabel createTitleLabel(String titleString){
         JLabel titleLabel = new JLabel(titleString);
         titleLabel.setFont(new Font("Segoe UI Black", 1, 18));
@@ -113,7 +119,8 @@ public class MenuController implements ActionListener{
     }
     
     /**
-     * Holds all functionality behind button presses.
+     * This function is called when a button is pressed in one of the menus.
+     * The button will correspond to an action inside of this function.
      */
     public void actionPerformed(ActionEvent e){
 
