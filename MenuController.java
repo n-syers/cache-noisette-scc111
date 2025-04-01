@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -85,6 +86,15 @@ public class MenuController implements ActionListener{
         }
         gameMenuBar.add(levelSelectorMenu);
     }
+    public JLabel createTitleLabel(String titleString){
+        JLabel titleLabel = new JLabel(titleString);
+        titleLabel.setFont(new Font("Segoe UI Black", 1, 18));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setMaximumSize(new Dimension(200, 75));
+        titleLabel.setMinimumSize(new Dimension(200, 75));
+        titleLabel.setPreferredSize(new Dimension(200, 75));
+        return titleLabel;
+    }
     
     /**
      * Returns the JPanel for the button menu.
@@ -101,6 +111,7 @@ public class MenuController implements ActionListener{
     public JMenuBar getMenuBar(){
         return this.gameMenuBar;
     }
+    
     /**
      * Holds all functionality behind button presses.
      */
