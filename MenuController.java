@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.logging.Level;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
@@ -128,6 +130,8 @@ public class MenuController implements ActionListener{
         if(e.getSource() == playButton){
              System.out.println("Play Button Pressed");
              buttonMenu.setVisible(false);
+             LevelController levelController = new LevelController();
+             levelController.loadLevel(1);
         };
 
         // exit the game with status 0
