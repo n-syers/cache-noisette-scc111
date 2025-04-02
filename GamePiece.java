@@ -3,15 +3,15 @@ import java.awt.Point;
 public class GamePiece {
     protected GameBoard gameBoard; // Reference to GameBoard for all pieces.
 
-    private String[] imageFilenames = new String[1]; // Array of imageFilenames for game pieces. By default is size 1
+    private Picture[] imageArray = new Picture[1]; // Array of imageFilenames for game pieces. By default is size 1
     private Point[] piecePositions = new Point[1]; // Array of gamePiece positions. By default is size 1
 
     /**
      * Retrieves an array of imageFilenames for a game piece. By default array size is 1, can be overriden to 2 or 3 max.
-     * @return imageFilenames string array
+     * @return imageFilenames picture array
      */
-    public String[] getImageFilenames(){
-        return this.imageFilenames;
+    public Picture[] getImageFilenames(){
+        return this.imageArray;
     }
 
     /**
@@ -31,7 +31,11 @@ public class GamePiece {
         gameBoard.placePiece(this, x, y, direction);
     }
 
+    /**
+     * Determins whether a piece can be walked over or not. By default is true but might be overriden.
+     * @return True by default
+     */
     public Boolean isWalkable(){
-        return false; // Default response, can be overriden
+        return true; // Default response, can be overriden
     }
 }
