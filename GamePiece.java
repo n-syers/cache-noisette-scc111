@@ -21,10 +21,17 @@ public class GamePiece {
     public Point[] getPositions(){
         return this.piecePositions;
     }
+    /**
+     * Places GamePiece at specific cordinates given a direction
+     * @param x The X-Cord on gameBoard
+     * @param y The Y-Cord on gameBoard
+     * @param direction Direction enum for rotation of gamePiece
+     */
+    public void setPositions(int x, int y, Direction direction){
+        gameBoard.placePiece(this, x, y, direction);
+    }
 
-    public void setPositions(int x, int y, int rotation){
-        for (int i = 0; i < piecePositions.length; i++) {
-            
-        }
+    public Boolean isWalkable(){
+        return false; // Default response, can be overriden
     }
 }

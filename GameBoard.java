@@ -8,7 +8,7 @@ public class GameBoard {
     }
 
 
-    public void placePiece(GamePiece piece, int x, int y){
+    public void placePiece(GamePiece piece, int x, int y, Direction direction){
 
     }
 
