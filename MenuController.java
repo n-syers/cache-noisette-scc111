@@ -13,6 +13,7 @@ public class MenuController{
     protected GameBoard gameBoard;
     protected LevelController levelController = new LevelController(gameBoard);
     private JFrame cacheNoisettJFrame;
+    private JPanel buttonMenu = new JPanel(); // Empty JPanel. Populated in createButtonMenu()
 
     /**
      * Constructor for MenuController.
@@ -42,7 +43,7 @@ public class MenuController{
     }
     
     public void createButtonMenu(){
-        JPanel buttonMenu = new JPanel(); // Holds all JSwing Objects for Main Menu
+        buttonMenu = new JPanel(); // Holds all JSwing Objects for Main Menu
         JPanel buttonGroup = new JPanel(); // Holds both main menu buttons.
         JButton playButton = new JButton(); // Initiates the loading of Level 1
         JButton quitButton = new JButton(); // Exits Program with Status 0
@@ -61,7 +62,7 @@ public class MenuController{
         playButton.setMaximumSize(new Dimension(200, 75));
         playButton.setMinimumSize(new Dimension(200, 75));
         playButton.setPreferredSize(new Dimension(200, 75));
-        playButton.addActionListener(e -> levelController.loadLevel(1));
+        playButton.addActionListener(e -> loadLevel(1));
         buttonGroup.add(playButton);
 
         // Set quitButton Properties
@@ -126,7 +127,7 @@ public class MenuController{
                 int levelNumber = Integer.parseInt(menuItemNameString.replace("level", "").replace(".bmp", ""));
                 JMenuItem levelMenuItem = new JMenuItem();
                 levelMenuItem.setText("Level " + levelNumber);
-                levelMenuItem.addActionListener(e -> levelController.loadLevel(levelNumber));
+                levelMenuItem.addActionListener(e -> loadLevel(levelNumber));
                 levelSelectorMenu.add(levelMenuItem);
             }
         } catch (IOException e) {
@@ -146,5 +147,16 @@ public class MenuController{
     public void quitGame(){
         System.out.println("Exiting Program, Goodbye!");
         System.exit(0);
+    }
+
+    private void loadLevel(int levelNumber){
+        // Remove buttonMenu
+        cacheNoisettJFrame.remove(buttonMenu);
+
+        // Refresh Frame
+        cacheNoisettJFrame.revalidate();
+        cacheNoisettJFrame.repaint();
+
+        levelController.loadLevel(levelNumber);
     }
 }
