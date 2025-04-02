@@ -10,14 +10,15 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 public class MenuController{
-    protected LevelController levelController = new LevelController();
+    protected GameBoard gameBoard;
+    protected LevelController levelController = new LevelController(gameBoard);
     private JFrame cacheNoisettJFrame;
 
     /**
      * Constructor for MenuController.
      * Creates a reference to a JFrame for the menus to be added to.
      */
-    public MenuController(JFrame cacheNoisettJFrame){
+    public MenuController(JFrame cacheNoisettJFrame, GameBoard gameBoard){
         this.cacheNoisettJFrame = cacheNoisettJFrame;
     }
     

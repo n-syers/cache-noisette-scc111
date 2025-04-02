@@ -3,11 +3,16 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class LevelController {
+public class LevelController {    
+    protected GameBoard gameBoard;
     private JPanel activeLevel = new JPanel();
     private int imageWidth = 15;
     private int imageHeight = 15;
-    
+
+    public LevelController(GameBoard gameBoard){
+        this.gameBoard = gameBoard;
+    }
+
     /**
      * Loads the level for the game based on the number provided. Takes levelNumber, finds .bmp file, loads level. Initiates Game Mechanics.
      * @param levelNumber The number for the level to load. e.g. if 1, load level file "level1.bmp"
