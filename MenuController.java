@@ -93,7 +93,8 @@ public class MenuController{
         JMenu gameMenu = new JMenu("Game"); // Menu to hold extra functions buttons
         JMenuItem restartGameStateMenuItem = new JMenuItem("Restart Game State"); // Button to reset program to initial state
         JMenuItem quitMenuItem = new JMenuItem("Quit Game"); // Button to quit the program
-
+        
+        gameMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         restartGameStateMenuItem.addActionListener(_ -> System.out.println("Restarting Game State"));
         quitMenuItem.addActionListener(_ -> quitGame());
 
