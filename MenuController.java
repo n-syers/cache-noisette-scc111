@@ -57,19 +57,19 @@ public class MenuController{
 
         // Set playButton Properties
         playButton.setText("Click to Play");
-        playButton.setMaximumSize(null);
-        playButton.setMinimumSize(null);
+        playButton.setMaximumSize(new Dimension(200, 75));
+        playButton.setMinimumSize(new Dimension(200, 75));
         playButton.setPreferredSize(new Dimension(200, 75));
-        playButton.addActionListener(_ -> levelController.loadLevel(1));
+        playButton.addActionListener(e -> levelController.loadLevel(1));
         buttonGroup.add(playButton);
 
         // Set quitButton Properties
         quitButton.setText("Quit Game");
         quitButton.setHorizontalTextPosition(SwingConstants.CENTER);
-        quitButton.setMaximumSize(null);
-        quitButton.setMinimumSize(null);
+        quitButton.setMaximumSize(new Dimension(200, 75));
+        quitButton.setMinimumSize(new Dimension(200, 75));
         quitButton.setPreferredSize(new Dimension(200, 75));
-        quitButton.addActionListener(_ -> quitGame());
+        quitButton.addActionListener(e -> quitGame());
         buttonGroup.add(quitButton);
 
         // Add buttonGroup to initialPlayMenu
@@ -93,10 +93,10 @@ public class MenuController{
         JMenu gameMenu = new JMenu("Game"); // Menu to hold extra functions buttons
         JMenuItem restartGameStateMenuItem = new JMenuItem("Restart Game State"); // Button to reset program to initial state
         JMenuItem quitMenuItem = new JMenuItem("Quit Game"); // Button to quit the program
-        
+
         gameMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        restartGameStateMenuItem.addActionListener(_ -> System.out.println("Restarting Game State"));
-        quitMenuItem.addActionListener(_ -> quitGame());
+        restartGameStateMenuItem.addActionListener(e -> System.out.println("Restarting Game State"));
+        quitMenuItem.addActionListener(e -> quitGame());
 
         gameMenu.add(restartGameStateMenuItem);
         gameMenu.add(quitMenuItem);
@@ -109,8 +109,8 @@ public class MenuController{
 
         levelSelectorMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
-        resetLevelMenuItem.addActionListener(_ -> System.out.println("Resetting Level"));
-        customLevelMenuItem.addActionListener(_ -> System.out.println("Loading Custom Level"));
+        resetLevelMenuItem.addActionListener(e-> System.out.println("Resetting Level"));
+        customLevelMenuItem.addActionListener(e -> System.out.println("Loading Custom Level"));
 
         levelSelectorMenu.add(resetLevelMenuItem);
         levelSelectorMenu.add(customLevelMenuItem);
@@ -125,7 +125,7 @@ public class MenuController{
                 int levelNumber = Integer.parseInt(menuItemNameString.replace("level", "").replace(".bmp", ""));
                 JMenuItem levelMenuItem = new JMenuItem();
                 levelMenuItem.setText("Level " + levelNumber);
-                levelMenuItem.addActionListener(_ -> levelController.loadLevel(levelNumber));
+                levelMenuItem.addActionListener(e -> levelController.loadLevel(levelNumber));
                 levelSelectorMenu.add(levelMenuItem);
             }
         } catch (IOException e) {
@@ -142,6 +142,7 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
+
     public void quitGame(){
         System.out.println("Exiting Program, Goodbye!");
         System.exit(0);
