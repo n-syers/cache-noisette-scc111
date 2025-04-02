@@ -142,7 +142,6 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
-
     public void quitGame(){
         System.out.println("Exiting Program, Goodbye!");
         System.exit(0);
