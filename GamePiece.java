@@ -2,12 +2,13 @@ import java.awt.Point;
 
 public class GamePiece {
     protected GameBoard gameBoard; // Reference to GameBoard for all pieces.
-
+    private int size; // size of the GamePiece on the board
     private Picture[] imageArray; // Array of Pictures
-    private Point[] piecePositions = new Point[1]; // Array of gamePiece positions. By default is size 1
-
+    private Point[] piecePositions; // Array of gamePiece positions.
+    private Point headPoint; // Position of the head on the board
+    
     /**
-     * Retrieves an array of imageFilenames for a game piece. By default array size is 1, can be overriden to 2 or 3 max.
+     * Retrieves an array of imageFilenames for a game piece.
      * @return imageFilenames picture array
      */
     public Picture[] getPictures(){
@@ -15,10 +16,10 @@ public class GamePiece {
     }
 
     /**
-     * Retrieves an array of points for a game piece. By default array size is 1, can be overriden to 2 or 3 max.
+     * Retrieves an array of points for a game piece.
      * @return piecePositions point array
      */
-    public Point[] getPositions(){
+    public Point[] getPiecePositions(){
         return this.piecePositions;
     }
     /**
@@ -27,8 +28,16 @@ public class GamePiece {
      * @param y The Y-Cord on gameBoard
      * @param direction Direction enum for rotation of gamePiece
      */
-    public void setPositions(int x, int y, Direction direction){
-        gameBoard.placePiece(this, x, y, direction);
+    public void setPosition(int x, int y, Direction direction){
+        headPoint = new Point(x, y);
+        gameBoard.placePiece(this, x, y, direction, size);
+    }
+    /**
+     * This function returns the point value of headPoint.
+     * @return Point headPoint
+     */
+    public Point getHeadPosition(){
+        return headPoint;
     }
 
     /**
