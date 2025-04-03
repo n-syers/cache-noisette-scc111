@@ -23,7 +23,6 @@ public class Hole extends GamePiece{
      */
     public void placeNut(){
         hasNut = true;
-        gameBoard.updateImageAt(this, (int) headPoint.getX(), (int) headPoint.getY(), imageArray[1]);
     }
 
     // Inherited Functions
