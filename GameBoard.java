@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -10,11 +9,34 @@ import javax.swing.*;
 public class GameBoard {
     protected JFrame cacheNoisetteJFrame;
 
+    private JPanel gameBoardPanel = new JPanel();
+    private JButton[][] buttonBoard = new JButton[4][4];
+    private Object[][] gamePieceBoard = new Object[4][4];
+    private Object[][] holesBoard = new Object[4][4];
+
     public GameBoard(JFrame cacheNoisetteJFrame){
         this.cacheNoisetteJFrame = cacheNoisetteJFrame;
+        initialisePanel();
+        initialiseEmptyBoards();
+    }
+    private void initialisePanel(){
+        gameBoardPanel.setLayout(new GridLayout(4,4));
+        gameBoardPanel.setMaximumSize(new Dimension(400,400));
+        gameBoardPanel.setMinimumSize(new Dimension(400,400));
+        gameBoardPanel.setPreferredSize(new Dimension(400,400));
+        gameBoardPanel.setBackground(Color.BLACK);
     }
 
-    public void initialiseEmptyBoard(){
+    public void initialiseEmptyBoards(){
+
+        // Initialise Empty 2D arrays with Objects and JButtons
+        for (int row = 0; row < buttonBoard.length; row++) {
+            for (int col = 0; col < buttonBoard.length; col++) {
+                buttonBoard[row][col] = new JButton(new Picture("assets\\icons\\Empty.png", 0));
+                gamePieceBoard[row][col] = new Object();
+                holesBoard[row][col] = new Object();
+            }
+        }
         try {
             System.out.println("Initialising Empty GameBoard");
             File file = new File("assets/levels/blankWithHoles.bmp");
@@ -29,11 +51,11 @@ public class GameBoard {
                     int red = (rgb >> 16) & 0xFF;
                     int green = (rgb >> 8) & 0xFF;
                     int blue = rgb & 0xFF;
-                    // Determin what piece is what through if statements.
-                    if (red == 185 && green == 122 && blue == 87) {
-                        System.out.println("Empty Space Detected");
-                    } else if (red == 255 && green == 255 && blue == 255) {
+                    // Determin if to place a hole at cord.
+                    if (red == 255 && green == 255 && blue == 255) {
                         System.out.println("Hole Space Detected");
+                        Hole hole = new Hole();
+                        placePiece(hole, col/4, row/4, Direction.NORTH, 1);
                     }
                 }
             }
@@ -43,12 +65,21 @@ public class GameBoard {
     }
 
     public void placePiece(GamePiece piece, int x, int y, Direction direction, int size){
-
+        if (piece instanceof Hole) {
+            holesBoard[y][x] = piece;
+            buttonBoard[y][x].setIcon(piece.getPictures()[0]);
+        } else if (piece instanceof Squirrel) {
+            // Do Something
+        }
     }
 
-    public GamePiece getPieceAt(int x, int y){
-        GamePiece piece = new GamePiece();
-        return piece;
+    public Object getPiecesAt(int x, int y){
+        Object[] pieces = new Object[]{gamePieceBoard[y][x], holesBoard[y][x]};
+        return pieces;
+    }
+
+    public void updateImageAt(GamePiece piece, int x, int y, Picture picture){
+
     }
 
     public void movePiece(GamePiece piece, Direction direction){
@@ -57,5 +88,10 @@ public class GameBoard {
 
     public void clearGameBoard(){
         
+    }
+
+    public void refreshFrame(){
+        cacheNoisetteJFrame.revalidate();
+        cacheNoisetteJFrame.repaint();
     }
 }
