@@ -1,7 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 public class LevelController {    
     private GameBoard gameBoard;

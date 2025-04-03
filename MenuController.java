@@ -4,9 +4,11 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import javax.swing.border.BevelBorder;
 
 public class MenuController{
@@ -114,7 +116,7 @@ public class MenuController{
         levelSelectorMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
         resetLevelMenuItem.addActionListener(e-> System.out.println("Resetting Level"));
-        customLevelMenuItem.addActionListener(e -> System.out.println("Loading Custom Level"));
+        customLevelMenuItem.addActionListener(e -> loadCustomLevel());
 
         levelSelectorMenu.add(resetLevelMenuItem);
         levelSelectorMenu.add(customLevelMenuItem);
@@ -159,13 +161,28 @@ public class MenuController{
      * @param levelNumber The number of the level to load
      */
     private void loadLevel(int levelNumber){
-        // Remove buttonMenu
         cacheNoisettJFrame.remove(buttonMenu);
-
-        // Refresh Frame
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
 
         levelController.loadLevel(levelNumber);
+    }
+    
+    private void loadCustomLevel(){
+        System.out.println("Loading Custom File...");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select a Valid Level File");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Bitmap Images", "bmp"));
+        int userSelection = fileChooser.showOpenDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                cacheNoisettJFrame.remove(buttonMenu);
+                cacheNoisettJFrame.revalidate();
+                cacheNoisettJFrame.repaint();
+                levelController.loadLevelFromFilePath(selectedFile.getAbsolutePath());
+        } else {
+                System.out.println("No file selected");
+        }
     }
 }
