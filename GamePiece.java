@@ -3,7 +3,7 @@ import java.awt.Point;
 public class GamePiece {
     protected GameBoard gameBoard; // Reference to GameBoard for all pieces.
 
-    private Picture[] imageArray; // Array of imageFilenames for game pieces. By default is size 1
+    private Picture[] imageArray; // Array of Pictures
     private Point[] piecePositions = new Point[1]; // Array of gamePiece positions. By default is size 1
 
     /**
