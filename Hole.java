@@ -10,7 +10,7 @@ public class Hole extends GamePiece{
     private Point[] piecePositions = new Point[]{new Point(0,0)}; // Array of gamePiece positions.
     private Point headPoint; // Position of the head on the board
     private Boolean hasNut = false; // If the hole has a nut, False by default
-    
+
     /**
      * Determine whether the hole has a nut or not
      * @return A Boolean value of hasNut
@@ -23,6 +23,33 @@ public class Hole extends GamePiece{
      */
     public void placeNut(){
         hasNut = true;
-        gameBoard.updateImageAt(this, (int) headPoint.getX(), (int) headPoint.getY(), null);
+        gameBoard.updateImageAt(this, (int) headPoint.getX(), (int) headPoint.getY(), imageArray[1]);
+    }
+
+    // Inherited Functions
+    @Override
+    public Picture[] getPictures(){
+        return imageArray;
+    }
+
+    @Override
+    public Point getHeadPosition(){
+        return headPoint;
+    }
+
+    @Override
+    public void setPosition(int x, int y, Direction direction){
+        headPoint = new Point(x, y);
+        gameBoard.placePiece(this, x, y, direction, size);
+    }
+
+    @Override
+    public Point[] getPiecePositions(){
+        return piecePositions;
+    }
+
+    @Override  
+    public Boolean isWalkable() {
+        return true;
     }
 }

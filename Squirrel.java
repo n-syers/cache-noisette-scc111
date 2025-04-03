@@ -162,10 +162,31 @@ public class Squirrel extends GamePiece{
     public void dropNut(GamePiece hole){
         hasNut = false;
     }
-
-    // Override for isWalkable to false.
+    
+    // Inherited Functions
     @Override  
     public Boolean isWalkable() {
         return false;
+    }
+
+    @Override
+    public Picture[] getPictures(){
+        return imageArray;
+    }
+
+    @Override
+    public Point getHeadPosition(){
+        return headPoint;
+    }
+
+    @Override
+    public void setPosition(int x, int y, Direction direction){
+        headPoint = new Point(x, y);
+        gameBoard.placePiece(this, x, y, direction, size);
+    }
+
+    @Override
+    public Point[] getPiecePositions(){
+        return piecePositions;
     }
 }
