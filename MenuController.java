@@ -113,7 +113,7 @@ public class MenuController{
 
         levelSelectorMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 
-        resetLevelMenuItem.addActionListener(e-> System.out.println("Resetting Level"));
+        resetLevelMenuItem.addActionListener(e-> levelController.restartLevel());
         customLevelMenuItem.addActionListener(e -> loadCustomLevel());
 
         levelSelectorMenu.add(resetLevelMenuItem);
