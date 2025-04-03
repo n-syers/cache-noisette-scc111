@@ -147,12 +147,35 @@ public class GameBoard{
                 break;
         }
 
-        if (canMove(squirrel, newX, newY) == true) {
-            removePiece(piece);
-            squirrel.setPosition(newX, newY);
-            placePiece(squirrel, newX, newY, squirrel.getSize());
+        if (!(canMove(squirrel, newX, newY) == true)) {
+            System.out.println("An Error Occured: Illegal Move!");
         }
+        removePiece(piece);
+        squirrel.setPosition(newX, newY);
+        placePiece(squirrel, newX, newY, squirrel.getSize());
+        checkNuts(newX, newY);
     }
+
+    public void checkNuts(int x, int y){
+        GamePiece[] gamePieces = (GamePiece[]) getPiecesAt(x, y);
+        Squirrel squirrel = (Squirrel) gamePieces[0];
+        if (!(squirrel.isCarryingNut())) {
+            System.out.println("An Error Occured: Squirrel Is Not Carrying A Nut");
+            return;
+        }
+        if(!(gamePieces[1] instanceof Hole)) {
+            System.out.println("An Error Occured: Squirrel Not Over Hole");
+            return;
+        }
+        Hole hole = (Hole) gamePieces[1];
+        if (!(hole.hasNut())) {
+            System.out.println("An Error Occured: Hole Already Has Nut");
+            return;
+        }
+        hole.placeNut();
+        squirrel.dropNut();
+    }
+
     public Boolean canMove(Squirrel squirrel, int x, int y){
         Boolean isLegal = true;
         Point[] piecePoints = squirrel.getPiecePositions();
@@ -160,7 +183,6 @@ public class GameBoard{
             int newX = x + (int) piecePoints[i].getX();
             int newY = y + (int) piecePoints[i].getY();
             if (newX < 0 || newX >= 4 || newY < 0 || newY >= 4) {
-                System.out.println("Move out of bounds!");
                 isLegal = false;
                 break;
             }
@@ -168,7 +190,6 @@ public class GameBoard{
             // Ensure the new position is not occupied by another game piece
             if (gamePieceBoard[newY][newX] != null) {
                 if (gamePieceBoard[newY][newX] instanceof Flower || gamePieceBoard[newY][newX] instanceof Squirrel && gamePieceBoard[newY][newX] != squirrel) {
-                    System.out.println("Cannot move into an occupied space!");
                     isLegal = false;
                     break;
                 }
@@ -217,14 +238,12 @@ public class GameBoard{
         cacheNoisetteJFrame.revalidate();
         cacheNoisetteJFrame.repaint();
     }
-    
     private void processButtonPress(Point point){
         GamePiece[] pieces = (GamePiece[]) getPiecesAt((int) point.getX(), (int) point.getY());
         if (pieces[0] instanceof Squirrel) {
             selectedObject = pieces[0];
         }
     }
-
     public GamePiece getSelectedGamePiece(){
         return selectedObject;
     }
