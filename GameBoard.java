@@ -45,7 +45,6 @@ public class GameBoard{
         gameBoardPanel.add(westButton, BorderLayout.WEST);
         gameBoardPanel.add(centerPanel, BorderLayout.CENTER);
     }
-
     public void initialiseEmptyBoards(){
 
         // Initialise Empty 2D arrays with Objects and JButtons
@@ -84,7 +83,13 @@ public class GameBoard{
             System.err.println("An error occurred: " + e.getMessage());
         }
     }
+    public void clearGameBoard(){
+        centerPanel.removeAll();
+        buttonBoard = new JButton[4][4];
+        gamePieceBoard = new GamePiece[4][4];
+        holesBoard = new GamePiece[4][4];
 
+    }
     public void placePiece(GamePiece piece, int x, int y, int size){
         if (piece instanceof Hole) {
             holesBoard[y][x] = piece;
@@ -106,96 +111,6 @@ public class GameBoard{
         buttonBoard[y][x].revalidate();
         buttonBoard[y][x].repaint();
         refreshFrame();
-    }
-
-    public GamePiece[] getPiecesAt(int x, int y){
-        GamePiece[] pieces = new GamePiece[]{gamePieceBoard[y][x], holesBoard[y][x]};
-        return pieces;
-    }
-
-    public void updateImageAt(int x, int y, Picture picture){
-
-    }
-
-    public void movePiece(GamePiece piece, Direction direction){
-        if(!(piece instanceof Squirrel)){
-            System.out.println("An Error Occured: No Squirrel Selected");
-            return;
-        }
-        Squirrel squirrel = (Squirrel) piece;
-        Point headPoint = (Point) squirrel.getHeadPosition();
-        int newX = 0;
-        int newY = 0;
-        switch (direction) {
-            case NORTH:
-                newX = (int) headPoint.getX();
-                newY = -1 + (int) headPoint.getY();
-                break;
-            case SOUTH:
-                newX = (int) headPoint.getX();
-                newY = 1 + (int) headPoint.getY();
-                break;
-            case EAST: 
-                newX = 1 + (int) headPoint.getX();
-                newY = (int) headPoint.getY();
-                break;
-            case WEST:
-                newX = -1 + (int) headPoint.getX();
-                newY = (int) headPoint.getY();
-                break;
-            default:
-                break;
-        }
-
-        if (!(canMove(squirrel, newX, newY) == true)) {
-            System.out.println("An Error Occured: Illegal Move!");
-        }
-        removePiece(piece);
-        squirrel.setPosition(newX, newY);
-        placePiece(squirrel, newX, newY, squirrel.getSize());
-        checkNuts(newX, newY);
-    }
-
-    public void checkNuts(int x, int y){
-        GamePiece[] gamePieces = (GamePiece[]) getPiecesAt(x, y);
-        Squirrel squirrel = (Squirrel) gamePieces[0];
-        if (!(squirrel.isCarryingNut())) {
-            System.out.println("An Error Occured: Squirrel Is Not Carrying A Nut");
-            return;
-        }
-        if(!(gamePieces[1] instanceof Hole)) {
-            System.out.println("An Error Occured: Squirrel Not Over Hole");
-            return;
-        }
-        Hole hole = (Hole) gamePieces[1];
-        if (!(hole.hasNut())) {
-            System.out.println("An Error Occured: Hole Already Has Nut");
-            return;
-        }
-        hole.placeNut();
-        squirrel.dropNut();
-    }
-
-    public Boolean canMove(Squirrel squirrel, int x, int y){
-        Boolean isLegal = true;
-        Point[] piecePoints = squirrel.getPiecePositions();
-        for (int i = 0; i < piecePoints.length; i++) {
-            int newX = x + (int) piecePoints[i].getX();
-            int newY = y + (int) piecePoints[i].getY();
-            if (newX < 0 || newX >= 4 || newY < 0 || newY >= 4) {
-                isLegal = false;
-                break;
-            }
-    
-            // Ensure the new position is not occupied by another game piece
-            if (gamePieceBoard[newY][newX] != null) {
-                if (gamePieceBoard[newY][newX] instanceof Flower || gamePieceBoard[newY][newX] instanceof Squirrel && gamePieceBoard[newY][newX] != squirrel) {
-                    isLegal = false;
-                    break;
-                }
-            }
-        }
-        return isLegal;
     }
     public void removePiece(GamePiece piece){
         if (piece instanceof Squirrel) {
@@ -223,12 +138,27 @@ public class GameBoard{
         }
         refreshFrame();
     }
-    public void clearGameBoard(){
-        centerPanel.removeAll();
-        buttonBoard = new JButton[4][4];
-        gamePieceBoard = new GamePiece[4][4];
-        holesBoard = new GamePiece[4][4];
+    public void updateImageAt(int x, int y, Picture picture){
 
+    }
+    public void checkNuts(int x, int y){
+        GamePiece[] gamePieces = (GamePiece[]) getPiecesAt(x, y);
+        Squirrel squirrel = (Squirrel) gamePieces[0];
+        if (!(squirrel.isCarryingNut())) {
+            System.out.println("An Error Occured: Squirrel Is Not Carrying A Nut");
+            return;
+        }
+        if(!(gamePieces[1] instanceof Hole)) {
+            System.out.println("An Error Occured: Squirrel Not Over Hole");
+            return;
+        }
+        Hole hole = (Hole) gamePieces[1];
+        if (!(hole.hasNut())) {
+            System.out.println("An Error Occured: Hole Already Has Nut");
+            return;
+        }
+        hole.placeNut();
+        squirrel.dropNut();
     }
     public void renderBoard(){
         cacheNoisetteJFrame.add(gameBoardPanel, BorderLayout.CENTER);
@@ -246,5 +176,12 @@ public class GameBoard{
     }
     public GamePiece getSelectedGamePiece(){
         return selectedObject;
+    }
+    public GamePiece[][] getPiecesBoard(){
+        return gamePieceBoard;
+    }
+    public GamePiece[] getPiecesAt(int x, int y){
+        GamePiece[] pieces = new GamePiece[]{gamePieceBoard[y][x], holesBoard[y][x]};
+        return pieces;
     }
 }

@@ -33,6 +33,12 @@ public class MovementButton extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       gameBoard.movePiece(gameBoard.getSelectedGamePiece(), direction);
+       GamePiece piece = gameBoard.getSelectedGamePiece();
+       if(!(piece instanceof Squirrel)){
+            System.out.println("An Error Occured: No Squirrel Selected");
+            return;
+        }
+        Squirrel squirrel = (Squirrel) piece;
+        squirrel.move(direction);
     }
 }

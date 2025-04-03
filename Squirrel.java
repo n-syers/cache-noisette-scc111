@@ -123,6 +123,59 @@ public class Squirrel extends GamePiece{
         return hasNut;
     }
 
+    public Boolean canMove(int x, int y){
+        GamePiece[][] gamePieceBoard = (GamePiece[][]) gameBoard.getPiecesBoard();
+        Boolean isLegal = true;
+        Point[] piecePoints = this.getPiecePositions();
+        for (int i = 0; i < piecePoints.length; i++) {
+            int newX = x + (int) piecePoints[i].getX();
+            int newY = y + (int) piecePoints[i].getY();
+            if (newX < 0 || newX >= 4 || newY < 0 || newY >= 4) {
+                isLegal = false;
+                break;
+            }
+    
+            // Ensure the new position is not occupied by another game piece
+            if (gamePieceBoard[newY][newX] != null) {
+                if (gamePieceBoard[newY][newX] instanceof Flower || gamePieceBoard[newY][newX] instanceof Squirrel && gamePieceBoard[newY][newX] != this) {
+                    isLegal = false;
+                    break;
+                }
+            }
+        }
+        return isLegal;
+    }
+    public void move(Direction direction){
+        int newX = 0;
+        int newY = 0;
+        switch (direction) {
+            case NORTH:
+                newX = (int) headPoint.getX();
+                newY = -1 + (int) headPoint.getY();
+                break;
+            case SOUTH:
+                newX = (int) headPoint.getX();
+                newY = 1 + (int) headPoint.getY();
+                break;
+            case EAST: 
+                newX = 1 + (int) headPoint.getX();
+                newY = (int) headPoint.getY();
+                break;
+            case WEST:
+                newX = -1 + (int) headPoint.getX();
+                newY = (int) headPoint.getY();
+                break;
+            default:
+                break;
+        }
+        if (!(canMove(newX, newY) == true)) {
+            System.out.println("An Error Occured: Illegal Move!");
+        }
+        gameBoard.removePiece(this);
+        setPosition(newX, newY);
+        gameBoard.placePiece(this, newX, newY, size);
+        gameBoard.checkNuts(newX, newY);
+    }
     /**
      * Changes the head image to display without nut. Sets hasNut to false. Calls hasNut() in Hole class.
      * @param hole The hole that has placeNut() called.
