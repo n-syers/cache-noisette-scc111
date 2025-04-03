@@ -125,10 +125,11 @@ public class Squirrel extends GamePiece{
 
     /**
      * Changes the head image to display without nut. Sets hasNut to false. Calls hasNut() in Hole class.
-     * @param hole The hole that has hasNut() called.
+     * @param hole The hole that has placeNut() called.
      */
-    public void dropNut(GamePiece hole){
+    public void dropNut(){
         hasNut = false;
+        gameBoard.updateImageAt((int) headPoint.getX(), (int) headPoint.getY(), imageArray[0]);
     }
     
     // Inherited Functions
