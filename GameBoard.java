@@ -81,7 +81,13 @@ public class GameBoard {
                 buttonBoard[trueY][trueX].setIcon(piece.getPictures()[1+i]);
                 System.out.println("Placing GamePiece at: (" + x + ", " + y + ")");
             }
-        }
+        } else if (piece instanceof Flower) {
+            gamePieceBoard[y][x] = piece;
+            buttonBoard[y][x].setIcon(piece.getPictures()[0]);
+            System.out.println("Placing GamePiece at: (" + x + ", " + y + ")");
+            buttonBoard[y][x].revalidate();
+            buttonBoard[y][x].repaint();
+        }    
         refreshFrame();
     }
 
