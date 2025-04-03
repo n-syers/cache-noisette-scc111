@@ -6,8 +6,6 @@ import javax.swing.*;
 public class LevelController {    
     protected GameBoard gameBoard;
     private JPanel activeLevel = new JPanel();
-    private int imageWidth = 15;
-    private int imageHeight = 15;
 
     public LevelController(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -24,8 +22,8 @@ public class LevelController {
             BufferedImage bufferedImage = ImageIO.read(file);
 
             // Check every 3x3 pixels for RGB colour values. 
-            for(int row = 0; row < imageWidth; row+=4){
-                for(int col = 0; col < imageHeight; col+=4){
+            for(int row = 0; row < 15; row+=4){
+                for(int col = 0; col < 15; col+=4){
                     // Get RGB value from center of each 3x3 in image.
                     int rgb = bufferedImage.getRGB(1+col, 1+row);
                     // Extract red, green, and blue components from the RGB value
