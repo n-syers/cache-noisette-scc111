@@ -16,6 +16,8 @@ public class LevelController {
      * @param levelNumber The number for the level to load. e.g. if 1, load level file "level1.bmp"
      */
     public void loadLevel(int levelNumber){
+        gameBoard.clearGameBoard();
+        gameBoard.initialiseEmptyBoards();
         gameBoard.renderBoard();
         try {
             System.out.println("Loading Level " + levelNumber);

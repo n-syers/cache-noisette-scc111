@@ -105,7 +105,11 @@ public class GameBoard {
     }
 
     public void clearGameBoard(){
-        
+        gameBoardPanel.removeAll();
+        buttonBoard = new JButton[4][4];
+        gamePieceBoard = new Object[4][4];
+        holesBoard = new Object[4][4];
+
     }
     public void renderBoard(){
         cacheNoisetteJFrame.add(gameBoardPanel, BorderLayout.CENTER);
