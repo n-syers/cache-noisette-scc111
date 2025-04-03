@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class LevelController {    
     private GameBoard gameBoard;
-    private int activeLevel = 1;
+    private String activeLevelPath;
 
     public LevelController(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -16,14 +16,47 @@ public class LevelController {
      * @param levelNumber The number for the level to load. e.g. if 1, load level file "level1.bmp"
      */
     public void loadLevel(int levelNumber){
-        this.activeLevel = levelNumber;
         gameBoard.clearGameBoard();
         gameBoard.initialiseEmptyBoards();
         gameBoard.renderBoard();
         try {
             System.out.println("Loading Level " + levelNumber);
             File file = new File("assets/levels/level"+levelNumber+".bmp");
+            activeLevelPath = file.getPath();
             BufferedImage bufferedImage = ImageIO.read(file);
+            loadData(bufferedImage);
+        } catch (Exception e) {
+            System.err.println("(LEVELCONTROLLER::loadLevel) An error occurred: " + e.getMessage());
+        }
+        gameBoard.refreshFrame();
+    }
+
+    /**
+     * Load a custom bmp level file
+     * @param levelFile
+     */
+    public void loadLevelFromFilePath(String levelFilePath){
+        gameBoard.clearGameBoard();
+        gameBoard.initialiseEmptyBoards();
+        gameBoard.renderBoard();
+        try {
+            System.out.println("Loading Custom Level...");
+            File file = new File(levelFilePath);
+            BufferedImage bufferedImage = ImageIO.read(file);
+            loadData(bufferedImage);
+        } catch (Exception e) {
+            System.err.println("(LEVELCONTROLLER::loadLevelFromFilePath) An error occurred: " + e.getMessage());
+        }
+        gameBoard.refreshFrame();
+    }
+    
+    /**
+     * This function loads data from a buffered image and initiates the level creation process
+     * @param bufferedImage The image that is loaded
+     */
+    private void loadData(BufferedImage bufferedImage){
+        try {
+            System.out.println("Processing Level Data...");
 
             // Check every 3x3 pixels for RGB colour values. 
             for(int row = 0; row < 15; row+=4){
@@ -73,13 +106,12 @@ public class LevelController {
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         }
-        gameBoard.refreshFrame();
     }
-
+    
     /**
      * This function calls loadLevel with the current levelNumber. Restarting the level.
      */
     public void restartLevel(){
-        loadLevel(activeLevel);
+        loadLevelFromFilePath(activeLevelPath);
     }
 }
