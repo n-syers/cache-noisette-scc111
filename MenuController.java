@@ -10,8 +10,8 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 public class MenuController{
-    protected GameBoard gameBoard;
-    protected LevelController levelController = new LevelController(gameBoard);
+    private GameBoard gameBoard;
+    private LevelController levelController;
     private JFrame cacheNoisettJFrame;
     private JPanel buttonMenu = new JPanel(); // Empty JPanel. Populated in createButtonMenu()
 
@@ -21,6 +21,8 @@ public class MenuController{
      */
     public MenuController(JFrame cacheNoisettJFrame, GameBoard gameBoard){
         this.cacheNoisettJFrame = cacheNoisettJFrame;
+        this.gameBoard = gameBoard;
+        this.levelController = new LevelController(gameBoard);
     }
     
     /**
@@ -144,11 +146,18 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
+    /**
+     * Exits the program with status code 0
+     */
     public void quitGame(){
         System.out.println("Exiting Program, Goodbye!");
         System.exit(0);
     }
 
+    /**
+     * Removes buttonMenu and initiates levelController to load a level.
+     * @param levelNumber The number of the level to load
+     */
     private void loadLevel(int levelNumber){
         // Remove buttonMenu
         cacheNoisettJFrame.remove(buttonMenu);

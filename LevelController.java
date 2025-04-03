@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class LevelController {    
-    protected GameBoard gameBoard;
+    private GameBoard gameBoard;
     private JPanel activeLevel = new JPanel();
 
     public LevelController(GameBoard gameBoard){

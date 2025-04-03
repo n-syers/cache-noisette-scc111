@@ -9,6 +9,6 @@ public class Empty extends GamePiece{
         piecePositions = new Point[size];
         piecePositions[0] = new Point(0,0);
         imageArray = new Picture[size];
-        imageArray[0] = new Picture("Empty", direction.getValue(direction));
+        imageArray[0] = new Picture("assets/icons/Empty.png", direction.getValue(direction));
     }
 }

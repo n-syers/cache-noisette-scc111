@@ -8,7 +8,6 @@ import javax.swing.*;
  */
 public class Driver {
     private static JFrame cacheNoisetteJFrame = new JFrame("Cache Noisette Game"); // Initialise a JFrame with Title accessible via all classes.
-
     public static void main(String[] args) {
         Dimension windowSize = new Dimension(900, 900); // Size of Window
         GameBoard gameBoard = new GameBoard(cacheNoisetteJFrame);
