@@ -70,9 +70,19 @@ public class GameBoard {
         if (piece instanceof Hole) {
             holesBoard[y][x] = piece;
             buttonBoard[y][x].setIcon(piece.getPictures()[0]);
+            System.out.println("Placing GamePiece at: (" + x + ", " + y + ")");
+            buttonBoard[y][x].revalidate();
+            buttonBoard[y][x].repaint();
         } else if (piece instanceof Squirrel) {
-            // Do Something
+            for (int i = 0; i < size; i++) {
+                int trueX = x + (int) piece.getPiecePositions()[i].getX();
+                int trueY = y + (int) piece.getPiecePositions()[i].getY();
+                gamePieceBoard[trueY][trueX] = piece;
+                buttonBoard[trueY][trueX].setIcon(piece.getPictures()[1+i]);
+                System.out.println("Placing GamePiece at: (" + x + ", " + y + ")");
+            }
         }
+        refreshFrame();
     }
 
     public Object getPiecesAt(int x, int y){
