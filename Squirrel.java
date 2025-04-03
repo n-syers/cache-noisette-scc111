@@ -73,7 +73,6 @@ public class Squirrel extends GamePiece{
         piecePositions = new Point[size];
         switch (direction) {
             case NORTH:
-                System.out.println("NORTH");
                 if (colour == Colour.BLACK) {
                     piecePositions[2] = new Point(1,1);
                 } else if (colour == Colour.BROWN) {
