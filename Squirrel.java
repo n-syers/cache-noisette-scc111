@@ -70,55 +70,41 @@ public class Squirrel extends GamePiece{
      * @param direction
      */
     public void setPoints(Colour colour, Direction direction){
+        piecePositions = new Point[size];
         switch (direction) {
             case NORTH:
+                System.out.println("NORTH");
                 if (colour == Colour.BLACK) {
-                    piecePositions = new Point[3];
-                    piecePositions[2] = new Point(1,-1);
+                    piecePositions[2] = new Point(1,1);
                 } else if (colour == Colour.BROWN) {
-                    piecePositions = new Point[3];
                     piecePositions[2] = new Point(1,0);
-                } else {
-                    piecePositions = new Point[2];
-                }
-                piecePositions[0] = new Point(0,0);
-                piecePositions[1] = new Point(0,-1);
-                break;
-            case SOUTH:
-                if (colour == Colour.BLACK) {
-                    piecePositions = new Point[3];
-                    piecePositions[2] = new Point(-1,1);
-                } else if (colour == Colour.BROWN) {
-                    piecePositions = new Point[3];
-                    piecePositions[2] = new Point(-1,0);
-                } else {
-                    piecePositions = new Point[2];
                 }
                 piecePositions[0] = new Point(0,0);
                 piecePositions[1] = new Point(0,1);
                 break;
-            case EAST:
+            case SOUTH:
                 if (colour == Colour.BLACK) {
-                    piecePositions = new Point[3];
                     piecePositions[2] = new Point(-1,-1);
                 } else if (colour == Colour.BROWN) {
-                    piecePositions = new Point[3];
+                    piecePositions[2] = new Point(-1,0);
+                }
+                piecePositions[0] = new Point(0,0);
+                piecePositions[1] = new Point(0,-1);
+                break;
+            case EAST:
+                if (colour == Colour.BLACK) {
+                    piecePositions[2] = new Point(-1,-1);
+                } else if (colour == Colour.BROWN) {
                     piecePositions[2] = new Point(0,-1);
-                } else {
-                    piecePositions = new Point[2];
                 }
                 piecePositions[0] = new Point(0,0);
                 piecePositions[1] = new Point(-1,0);
                 break;
             case WEST:
                 if (colour == Colour.BLACK) {
-                    piecePositions = new Point[3];
                     piecePositions[2] = new Point(1,1);
                 } else if (colour == Colour.BROWN) {
-                    piecePositions = new Point[3];
                     piecePositions[2] = new Point(0,1);
-                } else {
-                    piecePositions = new Point[2];
                 }
                 piecePositions[0] = new Point(0,0);
                 piecePositions[1] = new Point(1,0);
