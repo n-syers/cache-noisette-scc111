@@ -54,7 +54,7 @@ public class GameBoard{
                 buttonBoard[row][col] = new JButton(new Picture("assets\\icons\\Empty.png", 0));
                 int i = row;
                 int j = col;
-                buttonBoard[row][col].addActionListener(e -> processButtonPress(new Point(i, j)));
+                buttonBoard[row][col].addActionListener(e -> processButtonPress(new Point(j, i)));
                 centerPanel.add(buttonBoard[row][col]);
             }
         }
@@ -123,44 +123,59 @@ public class GameBoard{
             return;
         }
         Squirrel squirrel = (Squirrel) piece;
-        squirrel.canMove(direction);
         Point headPoint = (Point) squirrel.getHeadPosition();
-        int newX;
-        int newY;
+        int newX = 0;
+        int newY = 0;
         switch (direction) {
             case NORTH:
-                removePiece(piece);
                 newX = (int) headPoint.getX();
                 newY = -1 + (int) headPoint.getY();
-                squirrel.setPosition(newX, newY);
-                placePiece(squirrel, newX, newY, squirrel.getSize());
                 break;
             case SOUTH:
-                removePiece(piece);
                 newX = (int) headPoint.getX();
                 newY = 1 + (int) headPoint.getY();
-                squirrel.setPosition(newX, newY);
-                placePiece(squirrel, newX, newY, squirrel.getSize());
                 break;
             case EAST: 
-                removePiece(piece);
                 newX = 1 + (int) headPoint.getX();
                 newY = (int) headPoint.getY();
-                squirrel.setPosition(newX, newY);
-                placePiece(squirrel, newX, newY, squirrel.getSize());
                 break;
             case WEST:
-                removePiece(piece);
                 newX = -1 + (int) headPoint.getX();
                 newY = (int) headPoint.getY();
-                squirrel.setPosition(newX, newY);
-                placePiece(squirrel, newX, newY, squirrel.getSize());
                 break;
             default:
                 break;
         }
-    }
 
+        if (canMove(squirrel, newX, newY) == true) {
+            removePiece(piece);
+            squirrel.setPosition(newX, newY);
+            placePiece(squirrel, newX, newY, squirrel.getSize());
+        }
+    }
+    public Boolean canMove(Squirrel squirrel, int x, int y){
+        Boolean isLegal = true;
+        Point[] piecePoints = squirrel.getPiecePositions();
+        for (int i = 0; i < piecePoints.length; i++) {
+            int newX = x + (int) piecePoints[i].getX();
+            int newY = y + (int) piecePoints[i].getY();
+            if (newX < 0 || newX >= 4 || newY < 0 || newY >= 4) {
+                System.out.println("Move out of bounds!");
+                isLegal = false;
+                break;
+            }
+    
+            // Ensure the new position is not occupied by another game piece
+            if (gamePieceBoard[newY][newX] != null) {
+                if (gamePieceBoard[newY][newX] instanceof Flower || gamePieceBoard[newY][newX] instanceof Squirrel && gamePieceBoard[newY][newX] != squirrel) {
+                    System.out.println("Cannot move into an occupied space!");
+                    isLegal = false;
+                    break;
+                }
+            }
+        }
+        return isLegal;
+    }
     public void removePiece(GamePiece piece){
         if (piece instanceof Squirrel) {
             Squirrel squirrel = (Squirrel) piece;

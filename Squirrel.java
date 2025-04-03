@@ -114,23 +114,6 @@ public class Squirrel extends GamePiece{
                 break;
         }
     }
-    /**
-     * Checks whether the piece is allowed to move in the provided direction. Returns result as boolean.
-     * @param direction The direction the piece wants to move (NORTH, SOUTH, EAST, WEST)
-     * @return Boolean
-     */
-    public Boolean canMove(Direction direction){
-        Boolean canMoveBool = false;
-        return canMoveBool;
-    }
-
-    /**
-     * Checks if move is legal using canMove(). If so, calls GameBoard to move piece in a direction.
-     * @param direction The direction the piece wants to move (NORTH, SOUTH, EAST, WEST)
-     */
-    public void move(Direction direction){
-        gameBoard.movePiece(this, direction);
-    }
 
     /**
      * Returns a boolean value for if the squirrel has a nut (hasNut)
