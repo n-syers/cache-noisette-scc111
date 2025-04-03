@@ -2,18 +2,21 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class GameBoard {
+public class GameBoard{
     protected JFrame cacheNoisetteJFrame;
 
     private JPanel gameBoardPanel = new JPanel();
+    private JPanel centerPanel = new JPanel();
     private JButton[][] buttonBoard = new JButton[4][4];
-    private Object[][] gamePieceBoard = new Object[4][4];
-    private Object[][] holesBoard = new Object[4][4];
+    private GamePiece[][] gamePieceBoard = new GamePiece[4][4];
+    private GamePiece[][] holesBoard = new GamePiece[4][4];
+    private GamePiece selectedObject;
 
     public GameBoard(JFrame cacheNoisetteJFrame){
         this.cacheNoisetteJFrame = cacheNoisetteJFrame;
@@ -21,11 +24,18 @@ public class GameBoard {
         initialiseEmptyBoards();
     }
     private void initialisePanel(){
-        gameBoardPanel.setLayout(new GridLayout(4,4));
-        gameBoardPanel.setMaximumSize(new Dimension(400,400));
-        gameBoardPanel.setMinimumSize(new Dimension(400,400));
-        gameBoardPanel.setPreferredSize(new Dimension(400,400));
+        centerPanel.setLayout(new GridLayout(4,4));
+        centerPanel.setMaximumSize(new Dimension(400,400));
+        centerPanel.setMinimumSize(new Dimension(400,400));
+        centerPanel.setPreferredSize(new Dimension(400,400));
+
+        gameBoardPanel.setLayout(new BorderLayout());
+        gameBoardPanel.setMaximumSize(new Dimension(600,600));
+        gameBoardPanel.setMinimumSize(new Dimension(600,600));
+        gameBoardPanel.setPreferredSize(new Dimension(600,600));
         gameBoardPanel.setBackground(Color.BLACK);
+
+        gameBoardPanel.add(centerPanel, BorderLayout.CENTER);
     }
 
     public void initialiseEmptyBoards(){
@@ -34,9 +44,10 @@ public class GameBoard {
         for (int row = 0; row < buttonBoard.length; row++) {
             for (int col = 0; col < buttonBoard.length; col++) {
                 buttonBoard[row][col] = new JButton(new Picture("assets\\icons\\Empty.png", 0));
-                gameBoardPanel.add(buttonBoard[row][col]);
-                gamePieceBoard[row][col] = new Object();
-                holesBoard[row][col] = new Object();
+                int i = row;
+                int j = col;
+                buttonBoard[row][col].addActionListener(e -> processButtonPress(new Point(i, j)));
+                centerPanel.add(buttonBoard[row][col]);
             }
         }
         try {
@@ -91,24 +102,74 @@ public class GameBoard {
         refreshFrame();
     }
 
-    public Object getPiecesAt(int x, int y){
-        Object[] pieces = new Object[]{gamePieceBoard[y][x], holesBoard[y][x]};
+    public GamePiece[] getPiecesAt(int x, int y){
+        GamePiece[] pieces = new GamePiece[]{gamePieceBoard[y][x], holesBoard[y][x]};
         return pieces;
     }
 
-    public void updateImageAt(GamePiece piece, int x, int y, Picture picture){
+    public void updateImageAt(int x, int y, Picture picture){
 
     }
 
     public void movePiece(GamePiece piece, Direction direction){
-
+        if(!(piece instanceof Squirrel)){
+            System.out.println("An Error Occured: No Squirrel Selected");
+            return;
+        }
+        Squirrel squirrel = (Squirrel) piece;
+        squirrel.canMove(direction);
+        Point headPoint = (Point) squirrel.getHeadPosition();
+        switch (direction) {
+            case NORTH:
+                removePiece(piece);
+                squirrel.setPosition((int) headPoint.getX(), 1 + (int) headPoint.getY(), direction);
+                break;
+            case SOUTH:
+                removePiece(piece);
+                squirrel.setPosition((int) headPoint.getX(), -1 + (int) headPoint.getY(), direction);
+                break;
+            case EAST: 
+                removePiece(piece);
+                squirrel.setPosition(1 + (int) headPoint.getX(), (int) headPoint.getY(), direction);
+                break;
+            case WEST:
+                removePiece(piece);
+                squirrel.setPosition(-1 + (int) headPoint.getX(), (int) headPoint.getY(), direction);
+                break;
+            default:
+                break;
+        }
     }
 
+    public void removePiece(GamePiece piece){
+        if (piece instanceof Squirrel) {
+            Squirrel squirrel = (Squirrel) piece;
+            Point headPoint = (Point) squirrel.getHeadPosition();
+            for (int i = 0; i < squirrel.getSize(); i++) {
+                int x = (int) piece.getPiecePositions()[i].getX();
+                int y = (int) piece.getPiecePositions()[i].getY();
+                gamePieceBoard[y][x] = null;
+                GamePiece boardPiece = (GamePiece) getPiecesAt(x, y)[1];
+                if(boardPiece instanceof Hole){
+                    Hole hole = (Hole) boardPiece;
+                    if(hole.hasNut()){
+                        buttonBoard[y][x].setIcon(hole.getPictures()[1]);
+                    } else {
+                        buttonBoard[y][x].setIcon(hole.getPictures()[0]);
+                    }
+                } else {
+                    buttonBoard[y][x].setIcon(new Picture("assets\\icons\\Empty.png", 0));
+                }
+                buttonBoard[y][x].setIcon(piece.getPictures()[1+i]);
+                System.out.println("Removing GamePiece at: (" + (int) headPoint.getX() + ", " + (int) headPoint.getY() + ")");
+            }
+        }
+    }
     public void clearGameBoard(){
-        gameBoardPanel.removeAll();
+        centerPanel.removeAll();
         buttonBoard = new JButton[4][4];
-        gamePieceBoard = new Object[4][4];
-        holesBoard = new Object[4][4];
+        gamePieceBoard = new GamePiece[4][4];
+        holesBoard = new GamePiece[4][4];
 
     }
     public void renderBoard(){
@@ -118,5 +179,16 @@ public class GameBoard {
     public void refreshFrame(){
         cacheNoisetteJFrame.revalidate();
         cacheNoisetteJFrame.repaint();
+    }
+    
+    private void processButtonPress(Point point){
+        GamePiece[] pieces = (GamePiece[]) getPiecesAt((int) point.getX(), (int) point.getY());
+        if (pieces[0] instanceof Squirrel) {
+            selectedObject = pieces[0];
+        }
+    }
+
+    public GamePiece getSelectedGamePiece(){
+        return selectedObject;
     }
 }
