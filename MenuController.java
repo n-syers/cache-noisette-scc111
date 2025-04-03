@@ -167,22 +167,13 @@ public class MenuController{
 
         levelController.loadLevel(levelNumber);
     }
-    
+    /**
+     * This function hides the main menu and calls loadCustomLevel() in LevelController. 
+     */
     private void loadCustomLevel(){
-        System.out.println("Loading Custom File...");
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Select a Valid Level File");
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Bitmap Images", "bmp"));
-        int userSelection = fileChooser.showOpenDialog(null);
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                cacheNoisettJFrame.remove(buttonMenu);
-                cacheNoisettJFrame.revalidate();
-                cacheNoisettJFrame.repaint();
-                levelController.loadLevelFromFilePath(selectedFile.getAbsolutePath());
-        } else {
-                System.out.println("No file selected");
-        }
+        cacheNoisettJFrame.remove(buttonMenu);
+        cacheNoisettJFrame.revalidate();
+        cacheNoisettJFrame.repaint();
+        levelController.loadCustomLevel();
     }
 }

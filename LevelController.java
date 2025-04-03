@@ -1,11 +1,17 @@
 import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LevelController {    
     private GameBoard gameBoard;
     private String activeLevelPath;
 
+    /**
+     * Constructor for LevelController. Creates a reference to gameBoard to allow the class to control the same gameBoard.
+     * @param gameBoard
+     */
     public LevelController(GameBoard gameBoard){
         this.gameBoard = gameBoard;
     }
@@ -31,8 +37,8 @@ public class LevelController {
     }
 
     /**
-     * Load a custom bmp level file
-     * @param levelFile
+     * Load the leve for the game via the provided file path. Take path and finds .bmp file, calls loadData() to process level data. Initiates Game Mechanics.
+     * @param levelFilePath String that holds the file path of the bmp file.
      */
     public void loadLevelFromFilePath(String levelFilePath){
         gameBoard.clearGameBoard();
@@ -48,7 +54,24 @@ public class LevelController {
         }
         gameBoard.refreshFrame();
     }
-    
+    /**
+     * This function allows the user to enter a bmp file and then calls loadData to process the data
+     */
+    public void loadCustomLevel(){
+        System.out.println("Loading Custom File...");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select a Valid Level File");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Bitmap Images", "bmp"));
+        int userSelection = fileChooser.showOpenDialog(null);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                loadLevelFromFilePath(selectedFile.getAbsolutePath());
+        } else {
+                System.out.println("No file selected");
+        }
+    }
+
     /**
      * This function loads data from a buffered image and initiates the level creation process
      * @param bufferedImage The image that is loaded
