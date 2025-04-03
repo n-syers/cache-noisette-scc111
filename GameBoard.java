@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -33,13 +34,14 @@ public class GameBoard {
         for (int row = 0; row < buttonBoard.length; row++) {
             for (int col = 0; col < buttonBoard.length; col++) {
                 buttonBoard[row][col] = new JButton(new Picture("assets\\icons\\Empty.png", 0));
+                gameBoardPanel.add(buttonBoard[row][col]);
                 gamePieceBoard[row][col] = new Object();
                 holesBoard[row][col] = new Object();
             }
         }
         try {
             System.out.println("Initialising Empty GameBoard");
-            File file = new File("assets/levels/blankWithHoles.bmp");
+            File file = new File("assets\\levels\\blankWithHoles.bmp");
             BufferedImage bufferedImage = ImageIO.read(file);
 
             // Check every 3x3 pixels for RGB colour values. 
@@ -89,7 +91,10 @@ public class GameBoard {
     public void clearGameBoard(){
         
     }
-
+    public void renderBoard(){
+        cacheNoisetteJFrame.add(gameBoardPanel, BorderLayout.CENTER);
+        refreshFrame();
+    }
     public void refreshFrame(){
         cacheNoisetteJFrame.revalidate();
         cacheNoisetteJFrame.repaint();
