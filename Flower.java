@@ -32,4 +32,9 @@ public class Flower extends GamePiece{
     public Boolean isWalkable() {
         return false;
     }
+
+    @Override
+    public int getSize() {
+        return size;
+    }
 }

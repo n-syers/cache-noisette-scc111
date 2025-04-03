@@ -174,4 +174,9 @@ public class Squirrel extends GamePiece{
     public Point[] getPiecePositions(){
         return piecePositions;
     }
+
+    @Override
+    public int getSize(){
+        return size;
+    }
 }

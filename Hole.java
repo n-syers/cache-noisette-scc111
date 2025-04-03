@@ -52,4 +52,8 @@ public class Hole extends GamePiece{
     public Boolean isWalkable() {
         return true;
     }
+    @Override
+    public int getSize() {
+        return size;
+    }
 }

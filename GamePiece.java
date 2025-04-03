@@ -2,6 +2,7 @@ import java.awt.Point;
 
 public abstract class GamePiece {
     protected GameBoard gameBoard; // Reference to GameBoard for all pieces.
+    private Boolean hasNut; // If the GamePiece object is carrying a nut.
     
     /**
      * Retrieves an array of imageFilenames for a game piece.
@@ -32,4 +33,9 @@ public abstract class GamePiece {
      * @return True by default
      */
     public abstract Boolean isWalkable();
+    /**
+     * Determines the size of the GamePiece returning the value as an int.
+     * @return int of size.
+     */
+    public abstract int getSize();
 }
