@@ -3,9 +3,8 @@ import java.awt.Point;
 public class Squirrel extends GamePiece{
     private Picture[] imageArray; // Array of Pictures used by the squirrel
     private Point[] piecePositions; // Position of each picture from head (Head picture is (0,0))
+    private int size; // Size of the piece on the board
     private Point headPoint; // Position of the head on the board
-    private Colour colour; // Colour of the squirrel
-    private Direction direction; // Direction of the squirrel
     private Boolean hasNut = true; // Boolean for the squirrel holding nut
 
     /**
@@ -14,11 +13,13 @@ public class Squirrel extends GamePiece{
      * @param colour The colour of the squirrel.
      * @param direction The direction the squirrel is facing.
      */
-    public Squirrel(Colour colour, Direction direction, int x, int y){
-        this.colour = colour;
-        this.direction = direction;
+    public Squirrel(Colour colour, Direction direction, int x, int y, int size){
         this.headPoint = new Point(x, y);
+        this.size = size;
         int rotation = direction.getValue(direction);
+
+        // Set the size of imageArray to 1 more than the size on board.
+        imageArray = new Picture[size+1];
 
         // set imageArray based on colour emun
         setPictures(colour, rotation);
@@ -32,7 +33,6 @@ public class Squirrel extends GamePiece{
     public void setPictures(Colour colour, int rotation){
         switch (colour) {
             case BLACK:
-                imageArray = new Picture[4];
                 imageArray[0] = new Picture("BlackSquirrel1", rotation);
                 imageArray[1] = new Picture("BlackSquirrel1Nut", rotation);
                 imageArray[2] = new Picture("BlackSquirrel2", rotation);
@@ -40,7 +40,6 @@ public class Squirrel extends GamePiece{
                 break;
 
             case BROWN:
-                imageArray = new Picture[4];
                 imageArray[0] = new Picture("BrownSquirrel1", rotation);
                 imageArray[1] = new Picture("BrownSquirrel1Nut", rotation);
                 imageArray[2] = new Picture("BrownSquirrel2", rotation);
@@ -48,14 +47,12 @@ public class Squirrel extends GamePiece{
                 break;
 
             case GREY:
-                imageArray = new Picture[3];
                 imageArray[0] = new Picture("GreySquirrel1", rotation);
                 imageArray[1] = new Picture("GreySquirrel1Nut", rotation);
                 imageArray[2] = new Picture("GreySquirrel2", rotation);
                 break;
 
             case RED:
-                imageArray = new Picture[3];
                 imageArray[0] = new Picture("RedSquirrel1", rotation);
                 imageArray[1] = new Picture("RedSquirrel1Nut", rotation);
                 imageArray[2] = new Picture("RedSquirrel2", rotation);
