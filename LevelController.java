@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class LevelController {    
     private GameBoard gameBoard;
-    private JPanel activeLevel = new JPanel();
+    private int activeLevel = 1;
 
     public LevelController(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -16,6 +16,7 @@ public class LevelController {
      * @param levelNumber The number for the level to load. e.g. if 1, load level file "level1.bmp"
      */
     public void loadLevel(int levelNumber){
+        this.activeLevel = levelNumber;
         gameBoard.clearGameBoard();
         gameBoard.initialiseEmptyBoards();
         gameBoard.renderBoard();
@@ -73,5 +74,12 @@ public class LevelController {
             System.err.println("An error occurred: " + e.getMessage());
         }
         gameBoard.refreshFrame();
+    }
+
+    /**
+     * This function calls loadLevel with the current levelNumber. Restarting the level.
+     */
+    public void restartLevel(){
+        loadLevel(activeLevel);
     }
 }
