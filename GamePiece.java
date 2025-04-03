@@ -2,7 +2,6 @@ import java.awt.Point;
 
 public abstract class GamePiece {
     protected GameBoard gameBoard; // Reference to GameBoard for all pieces.
-    private Boolean hasNut; // If the GamePiece object is carrying a nut.
     
     /**
      * Retrieves an array of imageFilenames for a game piece.
@@ -19,9 +18,8 @@ public abstract class GamePiece {
      * Places GamePiece at specific cordinates given a direction
      * @param x The X-Cord on gameBoard
      * @param y The Y-Cord on gameBoard
-     * @param direction Direction enum for rotation of gamePiece
      */
-    public abstract void setPosition(int x, int y, Direction direction);
+    public abstract void setPosition(int x, int y);
     /**
      * This function returns the point value of headPoint.
      * @return Point headPoint

@@ -18,9 +18,9 @@ public class Flower extends GamePiece{
     }
 
     @Override
-    public void setPosition(int x, int y, Direction direction){
+    public void setPosition(int x, int y){
         headPoint = new Point(x, y);
-        gameBoard.placePiece(this, x, y, direction, size);
+        gameBoard.placePiece(this, x, y, size);
     }
 
     @Override
