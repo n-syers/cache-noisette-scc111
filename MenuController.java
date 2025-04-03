@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 public class MenuController{
-    private GameBoard gameBoard;
+    protected GameBoard gameBoard;
     private LevelController levelController;
     private JFrame cacheNoisettJFrame;
     private JPanel buttonMenu = new JPanel(); // Empty JPanel. Populated in createButtonMenu()
