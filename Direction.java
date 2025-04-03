@@ -30,7 +30,7 @@ public enum Direction {
      * @param rotationDegree The value to find of enum.
      * @return Direction with value rotationDegree
      */
-    public Direction getDirection(int rotationDegree){
+    public static Direction getDirection(int rotationDegree){
         Direction direction = Direction.NORTH;
         switch (rotationDegree) {
             case 0:
