@@ -23,7 +23,7 @@ public class LevelController {
     public void loadLevel(int levelNumber){
         gameBoard.clearGameBoard();
         gameBoard.initialiseEmptyBoards();
-        gameBoard.renderBoard();
+        gameBoard.refreshFrame();
         try {
             System.out.println("Loading Level " + levelNumber);
             File file = new File("assets/levels/level"+levelNumber+".bmp");
@@ -43,7 +43,7 @@ public class LevelController {
     public void loadLevelFromFilePath(String levelFilePath){
         gameBoard.clearGameBoard();
         gameBoard.initialiseEmptyBoards();
-        gameBoard.renderBoard();
+        gameBoard.refreshFrame();
         try {
             System.out.println("Loading Custom Level...");
             File file = new File(levelFilePath);
@@ -107,16 +107,16 @@ public class LevelController {
                             blue = rgbArray[i][0] & 0xFF;
                             if (red == 255 && green == 127 && blue == 39) {
                                 System.out.println("Red Squirrel Head Space Detected with rotation " + rgbArray[i][1]);
-                                gameBoard.placePiece(new Squirrel(Colour.RED, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2), col/4, row/4, 2);
+                                gameBoard.placePiece(new Squirrel(Colour.RED, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2, gameBoard), col/4, row/4, 2);
                             } else if (red == 195 && green == 195 && blue == 195) {
                                 System.out.println("Grey Squirrel Head Space Detected with rotation " + rgbArray[i][1]);
-                                gameBoard.placePiece(new Squirrel(Colour.GREY, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2), col/4, row/4, 2);
+                                gameBoard.placePiece(new Squirrel(Colour.GREY, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2, gameBoard), col/4, row/4, 2);
                             } else if (red == 239 && green == 228 && blue == 176) {
                                System.out.println("Brown Squirrel Head Space Detected with rotation " + rgbArray[i][1]);
-                               gameBoard.placePiece(new Squirrel(Colour.BROWN, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3), col/4, row/4, 3);
+                               gameBoard.placePiece(new Squirrel(Colour.BROWN, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
                             } else if (red == 0 && green == 0 && blue == 0) {
                                 System.out.println("Black Squirrel Head Detected with rotation " + rgbArray[i][1]);
-                                gameBoard.placePiece(new Squirrel(Colour.BLACK, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3), col/4, row/4, 3);
+                                gameBoard.placePiece(new Squirrel(Colour.BLACK, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
                             }
                         }
                     } else if (red == 237 && green == 28 && blue == 36) {

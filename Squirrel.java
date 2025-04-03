@@ -1,7 +1,9 @@
 import java.awt.Point;
 
 public class Squirrel extends GamePiece{
+    private GameBoard gameBoard; // GameBoard reference. used to call functions.
     private Picture[] imageArray; // Array of Pictures used by the squirrel
+    private Picture[] activePictures; // Current Pictures to use on GameBoard
     private Point[] piecePositions; // Position of each picture from head (Head picture is (0,0))
     private int size; // Size of the piece on the board
     private Point headPoint; // Position of the head on the board
@@ -13,13 +15,15 @@ public class Squirrel extends GamePiece{
      * @param colour The colour of the squirrel.
      * @param direction The direction the squirrel is facing.
      */
-    public Squirrel(Colour colour, Direction direction, int x, int y, int size){
+    public Squirrel(Colour colour, Direction direction, int x, int y, int size, GameBoard gameBoard){
+        this.gameBoard = gameBoard;
         this.headPoint = new Point(x, y);
         this.size = size;
         int rotation = direction.getValue(direction);
 
         // Set the size of imageArray to 1 more than the size on board.
         imageArray = new Picture[size+1];
+        activePictures = new Picture[size];
 
         // set imageArray based on colour emun
         setPictures(colour, rotation);
@@ -37,6 +41,7 @@ public class Squirrel extends GamePiece{
                 imageArray[1] = new Picture("assets\\icons\\BlackSquirrel1Nut.png", rotation);
                 imageArray[2] = new Picture("assets\\icons\\BlackSquirrel2.png", rotation);
                 imageArray[3] = new Picture("assets\\icons\\SquirrelFlower.png", rotation);
+                activePictures[2] = imageArray[3];
                 break;
 
             case BROWN:
@@ -44,6 +49,7 @@ public class Squirrel extends GamePiece{
                 imageArray[1] = new Picture("assets\\icons\\BrownSquirrel1Nut.png", rotation);
                 imageArray[2] = new Picture("assets\\icons\\BrownSquirrel2.png", rotation);
                 imageArray[3] = new Picture("assets\\icons\\SquirrelFlower.png", rotation);
+                activePictures[2] = imageArray[3];
                 break;
 
             case GREY:
@@ -62,6 +68,8 @@ public class Squirrel extends GamePiece{
                 System.err.println("An error occurred: Unable to determine squirrel colour");
                 break;
         }
+        activePictures[0] = imageArray[1];
+        activePictures[1] = imageArray[2];
     }
 
     /**
@@ -182,7 +190,7 @@ public class Squirrel extends GamePiece{
      */
     public void dropNut(){
         hasNut = false;
-        gameBoard.updateImageAt((int) headPoint.getX(), (int) headPoint.getY(), imageArray[0]);
+        activePictures[0] = imageArray[0];
     }
     
     // Inherited Functions
@@ -193,7 +201,7 @@ public class Squirrel extends GamePiece{
 
     @Override
     public Picture[] getPictures(){
-        return imageArray;
+        return activePictures;
     }
 
     @Override
