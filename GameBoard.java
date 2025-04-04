@@ -5,7 +5,11 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
+/**
+ * This class represents an instance of {@code GameBoard} in the game.
+ * This class Manages the core logic between {@code GamePieces} and {@code JPanels}.
+ * It manages the layout of Swing components and updates the JFrame based on game state.
+ */
 public class GameBoard{
     //references
     private JFrame cacheNoisetteJFrame; // Reference to main program JFrame
