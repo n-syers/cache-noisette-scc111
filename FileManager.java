@@ -1,6 +1,10 @@
 import java.awt.image.BufferedImage;
 import java.io.RandomAccessFile;
 
+/**
+ * This class represents a file manager. Methods can be called directly, meaning
+ * an instance of this class does not need to be made to access methods.
+ */
 public class FileManager {
     /**
      * The function takes a directory path as a string and returns a BufferedImage using RandomAccessFile data streams. Byte data is read row-by-row and converted to RGB values and set on an empty bufferedImage.

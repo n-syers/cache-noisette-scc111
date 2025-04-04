@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GameBoard{
@@ -59,8 +57,7 @@ public class GameBoard{
         }
         try {
             System.out.println("Initialising Empty GameBoard");
-            File file = new File("assets\\levels\\blankWithHoles.bmp");
-            BufferedImage bufferedImage = ImageIO.read(file);
+            BufferedImage bufferedImage = FileManager.readBitmapAsBufferedImage("assets\\levels\\blankWithHoles.bmp");
 
             // Check every 3x3 pixels for RGB colour values. 
             for(int row = 0; row < 15; row+=4){
