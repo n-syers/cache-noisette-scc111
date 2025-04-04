@@ -17,9 +17,9 @@ public class Squirrel extends GamePiece{
     private Boolean hasNut = true; // Boolean for the squirrel holding nut
 
     /**
-     * Static Enum to represent squirrel colours.
+     * Enum to represent squirrel colours.
      */
-    public static enum Colour {
+    public enum Colour {
         BLACK,
         BROWN,
         GREY,
