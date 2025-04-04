@@ -159,7 +159,6 @@ public class MenuController{
         closeButton.addActionListener(e -> popupFrame.dispose());
         textArea.setText(bodyString);
         textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
         textArea.setOpaque(false);
         textArea.setEditable(false);
         textArea.setFocusable(false);
