@@ -7,7 +7,6 @@ public class LevelController {
     private GameBoard gameBoard; // Reference to GameBoard Object to access methods
     private MenuController menuController; // Reference to MenuController Object to access methods
     private String activeLevelPath; // Current file path to active level
-    private int currentLevelNum = 1; // Current level number. Set to 1 By default.
     private int numberSquirrels = 0; // Number of squirrels active. 
     private int nutsCollected = 0; // Number of nuts collected by user. Set to 0 by default.
 
@@ -39,7 +38,6 @@ public class LevelController {
             System.err.println("(LEVELCONTROLLER::loadLevel) An error occurred: " + e.getMessage());
         }
         gameBoard.refreshFrame();
-        currentLevelNum = levelNumber;
     }
 
     /**
