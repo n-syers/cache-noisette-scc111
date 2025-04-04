@@ -9,23 +9,28 @@ import java.nio.file.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
+/**
+ * The MenuController class is responsible for managing and controlling
+ * the UI menus within the application. It handles the creation, navigation and 
+ * actions of menus. Automatically adds the menus to a JFrame.
+ */
 public class MenuController{
-    private LevelController levelController;
-    private JFrame cacheNoisettJFrame;
+    private LevelController levelController; // A reference to the LevelController for the program
+    private JFrame cacheNoisettJFrame; // A reference to the main JFrame for the program
     private JPanel buttonMenu = new JPanel(); // Empty JPanel. Populated in createButtonMenu()
 
     /**
-     * Constructor for MenuController.
-     * Creates a reference to a JFrame for the menus to be added to.
+     * Constructs a {@code MenuController} instance.
+     * Initializes a reference to a {@code Driver JFrame} where the menus will be added.
      */
     public MenuController(JFrame cacheNoisettJFrame){
         this.cacheNoisettJFrame = cacheNoisettJFrame;
     }
     
     /**
-     * This function creates a JLabel with the text string its provided with preset formats.
+     * Creates a {@code JLabel} with a specified text and preset formats.
      * @param titleString The text inside of the label.
-     * @return The JLabel after formatting
+     * @return The JLabel after formatting.
      */
     public void createTitleLabel(String titleString){
         JLabel titleLabel = new JLabel(titleString);
@@ -41,7 +46,8 @@ public class MenuController{
         cacheNoisettJFrame.repaint();
     }
     /**
-     * This function creates a JPanel with the main buttons for the user to navigate. This funciton adds the buttonMenu to the JFrame.
+     * Creates a {@code JPanel} containing the main navigation buttons for the user.
+     * This method adds the buttons to the {@code JFrame CENTER} when called.
      */
     public void createButtonMenu(){
         buttonMenu = new JPanel(); // Holds all JSwing Objects for Main Menu
@@ -83,10 +89,12 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
+
     /**
-     * This function creates a JMenuBar with two JMenus ("Game" and "Select Level").
-     * These JMenus have many items, each with an event listener.
-     * Select Level JMenu populates based on level.bmp files in assets/levels/
+     * Creates a {@code JMenuBar} with two menus ("Game" and "Select Level")
+     * The Game menu contains two buttons to quit game and restart program. 
+     * The Select Level menu dynamically populates based on the {@code .BMP} files 
+     * found in the {@code assets/levels/} directory.
      */
     public void createMenuBar(){
         JMenuBar gameMenuBar = new JMenuBar();
@@ -145,34 +153,51 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
+    
+    /**
+     * Creates and displays a popup {@code JFrame} with the specified title and body content.
+     * @param titleString The title of the JFrame, displayed in the banner.
+     * @param bodyString The body text of the popup. Displayed in a textArea.
+     */
     public void createPopUp(String titleString, String bodyString){
         JFrame popupFrame = new JFrame(titleString);
         JPanel panel = new JPanel();
         JButton closeButton = new JButton("Close Popup");
         JTextArea textArea = new JTextArea(2, 20);
+
+        //Set JFrame Properties 
         popupFrame.setSize(new Dimension(300,200));
         popupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         popupFrame.setLocationRelativeTo(null);
+
+        // Add Action Listener To Button
         closeButton.addActionListener(e -> popupFrame.dispose());
+
+        //Set textArea Properties
         textArea.setText(bodyString);
-        textArea.setWrapStyleWord(true);
-        textArea.setOpaque(false);
         textArea.setEditable(false);
         textArea.setFocusable(false);
+        textArea.setWrapStyleWord(true);
+        textArea.setOpaque(false);
+
+        //Add the contents to the panel and display panel
         panel.add(textArea);
         panel.add(closeButton);
         popupFrame.add(panel);
         popupFrame.setVisible(true);
     }
+   
     /**
-     * Exits the program with status code 0
+     * Exits the program with status code 0.
+     * This method ensures all necessary cleanup is performed before termination.
      */
     public void quitGame(){
         System.out.println("Exiting Program, Goodbye!");
         System.exit(0);
     }
+   
     /**
-     * Removes buttonMenu and initiates levelController to load a level.
+     * This method removes {@code buttonMenu} and calls {@code LevelController} to load a level.
      * @param levelNumber The number of the level to load
      */
     private void loadLevel(int levelNumber){
@@ -182,8 +207,10 @@ public class MenuController{
 
         levelController.loadLevel(levelNumber);
     }
+  
     /**
-     * This function hides the main menu and calls loadCustomLevel() in LevelController. 
+     * Hides the main menu and triggers the loading of a custom level through 
+     * the {@code LevelController}
      */
     private void loadCustomLevel(){
         cacheNoisettJFrame.remove(buttonMenu);
@@ -193,7 +220,7 @@ public class MenuController{
     }
 
     /**
-     * Sets the reference to a LevelController instance.
+     * Sets the reference to a {@code LevelController} instance.
      * Allowing the MenuController to communicate with the LevelController.
      * @param levelController The LevelController instance to be referenced
      */
