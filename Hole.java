@@ -1,8 +1,11 @@
 import java.awt.Point;
 
 /**
- * This class represents a Hole GamePiece. Once an instance of this is created, it can
- * be used to manage and manipulate the GameBoard.
+ * This class represents a {@code hole} in the game, which extends the {@code GamePiece} abstract class.
+ * This class defines the behaviour, attributes, and actions a hole instance can perform within
+ * the game. 
+ * 
+ * @see GamePiece
  */
 public class Hole extends GamePiece{
     private int size = 1; // size of the GamePiece on the board
@@ -12,14 +15,14 @@ public class Hole extends GamePiece{
     private Boolean hasNut = false; // If the hole has a nut, False by default
 
     /**
-     * Determine whether the hole has a nut or not
-     * @return A Boolean value of hasNut
+     * Determines whether the hole has a nut or not
+     * @return {@code true} if {@code hasNut} is true, {@code false} otherwise.
      */
     public Boolean hasNut(){
         return hasNut;
     }
     /**
-     * Sets hasNut to true and updates image on gameBoard. 
+     * Sets {@code hasNut} to {@code true}. 
      */
     public void placeNut(){
         hasNut = true;
