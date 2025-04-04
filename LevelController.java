@@ -30,8 +30,10 @@ public class LevelController {
     }
 
     /**
-     * Loads the level for the game based on the number provided. Takes levelNumber, finds .bmp file, loads level. Initiates Game Mechanics.
-     * @param levelNumber The number for the level to load. e.g. if 1, load level file "level1.bmp"
+     * Load a game level from the specified level number. 
+     * Takes level number and locates the corresponding {@code .bmp file}, then calls {@code loadData()} to process
+     * the level data and initiate Game Mechanics.
+     * @param levelNumber Integer that corresponds to the level bmp file.
      */
     public void loadLevel(int levelNumber){
         gameBoard.clearGameBoard();
@@ -49,7 +51,9 @@ public class LevelController {
     }
 
     /**
-     * Load the leve for the game via the provided file path. Take path and finds .bmp file, calls loadData() to process level data. Initiates Game Mechanics.
+     * Load a game level from the specified file path. 
+     * Takes file path and locates the corresponding {@code .bmp file}, then calls {@code loadData()} to process
+     * the level data and initiate Game Mechanics.
      * @param levelFilePath String that holds the file path of the bmp file.
      */
     public void loadLevelFromFilePath(String levelFilePath){
@@ -65,7 +69,8 @@ public class LevelController {
         gameBoard.refreshFrame();
     }
     /**
-     * This function allows the user to enter a bmp file and then calls loadData to process the data
+     * Allows the user to select a bmp file and then calls {@code loadData}
+     * to process the files data
      */
     public void loadCustomLevel(){
         System.out.println("Loading Custom File...");
@@ -81,9 +86,11 @@ public class LevelController {
                 System.out.println("No file selected");
         }
     }
+    
     /**
-     * This function loads data from a buffered image and initiates the level creation process
-     * @param bufferedImage The image that is loaded
+     * Loads data from a {@code BufferedImage} and initiates the level 
+     * creation process based on the image content.
+     * @param bufferedImage The {@code BufferedImage} to be processed.
      */
     private void loadDataFromBufferedImage(BufferedImage bufferedImage){
         try {
@@ -99,7 +106,7 @@ public class LevelController {
                     int red = (rgb >> 16) & 0xFF;
                     int green = (rgb >> 8) & 0xFF;
                     int blue = rgb & 0xFF;
-                    // Determin what piece is what through if statements.
+                    // Determin if the piece is a Squirrel or Flower
                     if (red == 255 && green == 201 && blue == 14) {
                         System.out.println("Squirrel Head Space Detected");
                         int[][] rgbArray = new int[4][2];
@@ -151,14 +158,14 @@ public class LevelController {
         }
     }
     /**
-     * This function calls loadLevel with the current activeLevelPath. Restarting the level.
+     * Restarts the current level by calling {@code loadLevel()} with the {@code activeLevelPath} to reload the level.
      */
     public void restartLevel(){
         loadLevelFromFilePath(activeLevelPath);
     }
     /**
-     * Sets the reference to a MenuController instance.
-     * Allowing the LevelController to communicate with the MenuController.
+     * Sets the reference to a {@code MenuController} instance, allowing
+     * the {@code LevelController} to communicate with the {@code MenuController}.
      * @param menuController The MenuController instance to be referenced
      */
     public void setMenuController(MenuController menuController){
