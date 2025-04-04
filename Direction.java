@@ -1,6 +1,6 @@
 /**
- * This class represents a direction of pieces and movement. Once an instance of this is created, it can
- * be used to create GamePieces and movemeent buttons.
+ * This enum represents a direction a {@code GamePieces} could have.
+ * Each direction has a corrisponding int {@code rotation} value.
  */
 public enum Direction {
     NORTH(0),
@@ -8,27 +8,27 @@ public enum Direction {
     EAST(90),
     WEST(270);
 
-    public final int rotationDegree;
+    public final int rotationDegree; // The rotation value associated with the enum name
 
     /**
-     * Constructor, assigns a value to each enum name
-     * @param rotationDegree The value to assign to the enum
+     * Constructs the direction by assigning {@code rotationDegree} the specified value.
+     * @param rotationDegree The value associated with the enum name.
      */
     private Direction(int rotationDegree){
         this.rotationDegree = rotationDegree;
     }
     /**
-     * Retrieves the value assigned to a enum name.
-     * @param direction The enum name to retrieve value from.
-     * @return The value of enum direction.
+     * Retrieves the {@code rotationDegree} of the {@code Direction} instance.
+     * @param direction The enum name to retrieve the value.
+     * @return {@code rotationDegree} assigned to the {@code direction}
      */
     public int getValue(Direction direction){
         return direction.rotationDegree;
     }
     /**
-     * Retrieves the enum name from the value that enum.
-     * @param rotationDegree The value to find of enum.
-     * @return Direction with value rotationDegree
+     * Retrieves the enum name given a value.
+     * @param rotationDegree The value of the enum name to find.
+     * @return Returns {@code direction} enum with {@code rotationDegree}.
      */
     public static Direction getDirection(int rotationDegree){
         Direction direction = Direction.NORTH;
