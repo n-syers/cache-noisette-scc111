@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class GameBoard{
     protected JFrame cacheNoisetteJFrame;
@@ -29,14 +30,11 @@ public class GameBoard{
         MovementButton southButton = new MovementButton(this, Direction.SOUTH, MovementButton.Size.LARGE);
         MovementButton eastButton = new MovementButton(this, Direction.EAST, MovementButton.Size.SMALL);
         MovementButton westButton = new MovementButton(this, Direction.WEST, MovementButton.Size.SMALL);
-        centerPanel.setLayout(new GridLayout(4,4));
-        centerPanel.setMaximumSize(new Dimension(400,400));
-        centerPanel.setMinimumSize(new Dimension(400,400));
+        centerPanel.setLayout(new GridLayout(4,4,1,1));
         centerPanel.setPreferredSize(new Dimension(400,400));
+        centerPanel.setBackground(Color.BLACK);
 
         gameBoardPanel.setLayout(new BorderLayout());
-        gameBoardPanel.setMaximumSize(new Dimension(600,600));
-        gameBoardPanel.setMinimumSize(new Dimension(600,600));
         gameBoardPanel.setPreferredSize(new Dimension(600,600));
         gameBoardPanel.setBackground(Color.BLACK);
 
@@ -52,6 +50,8 @@ public class GameBoard{
         for (int row = 0; row < buttonBoard.length; row++) {
             for (int col = 0; col < buttonBoard.length; col++) {
                 buttonBoard[row][col] = new JButton(new Picture("assets\\icons\\Empty.png", 0));
+                buttonBoard[row][col].setPreferredSize(new Dimension(100, 100));
+                buttonBoard[row][col].setBorder(null);
                 int i = row;
                 int j = col;
                 buttonBoard[row][col].addActionListener(e -> processButtonPress(new Point(j, i)));
