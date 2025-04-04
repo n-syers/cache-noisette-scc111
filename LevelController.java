@@ -171,7 +171,7 @@ public class LevelController {
         System.out.println("Nut collected. LevelController count: " + nutsCollected);
         if (nutsCollected == numberSquirrels) {
             System.out.println("Win Condition Met");
-            menuController.createPopUp("You Win!", "Congratulations, You have beaten the level!\nAccess more levels via the menu at the top.");
+            menuController.createPopUp("You Win!", "CONGRATULATIONS\nYou have beaten the level!\nAccess more levels via the menu at the top.");
             
         }
     }

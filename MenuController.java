@@ -149,9 +149,24 @@ public class MenuController{
         cacheNoisettJFrame.repaint();
     }
     public void createPopUp(String titleString, String bodyString){
-        JPopupMenu popupMenu = new JPopupMenu(titleString);
-        popupMenu.add(bodyString);
-        popupMenu.setVisible(true);
+        JFrame popupFrame = new JFrame(titleString);
+        JPanel panel = new JPanel();
+        JButton closeButton = new JButton("Close Popup");
+        JTextArea textArea = new JTextArea(2, 20);
+        popupFrame.setSize(new Dimension(300,200));
+        popupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        popupFrame.setLocationRelativeTo(null);
+        closeButton.addActionListener(e -> popupFrame.dispose());
+        textArea.setText(bodyString);
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+        textArea.setOpaque(false);
+        textArea.setEditable(false);
+        textArea.setFocusable(false);
+        panel.add(textArea);
+        panel.add(closeButton);
+        popupFrame.add(panel);
+        popupFrame.setVisible(true);
     }
     /**
      * Exits the program with status code 0
