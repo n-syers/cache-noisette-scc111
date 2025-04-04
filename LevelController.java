@@ -16,7 +16,7 @@ public class LevelController {
     private int nutsCollected; // Number of nuts collected by user
 
     /**
-     * Constructs a new instance of the class, initializing references to the GameBoard 
+     * Constructs a new instance of {@code LevelController}, initializing references to the GameBoard 
      * and MenuController, sets default values for variables, and parses reference of
      * this LevelController instance to gameBoard.
      * @param gameBoard      The GameBoard instance that manages the game state and UI components.

@@ -7,21 +7,31 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class GameBoard{
-    protected JFrame cacheNoisetteJFrame;
-    protected LevelController levelController;
+    //references
+    private JFrame cacheNoisetteJFrame; // Reference to main program JFrame
+    protected LevelController levelController; // Reference to main LevelController
 
-    private JPanel gameBoardPanel = new JPanel();
-    private JPanel centerPanel = new JPanel();
-    private JButton[][] buttonBoard = new JButton[4][4];
-    private GamePiece[][] gamePieceBoard = new GamePiece[4][4];
-    private GamePiece[][] holesBoard = new GamePiece[4][4];
-    private GamePiece selectedObject;
-
+    // gameBoard variables
+    private JPanel gameBoardPanel = new JPanel(); // Holds all grid button objects, representing the GameBoard state
+    private JPanel centerPanel = new JPanel(); // Holds all game specific Swing objects displayed CENTER of cacheNoisetteJFrame
+    private JButton[][] buttonBoard = new JButton[4][4]; // Holds the references to all JButtons on gameBoardPanel
+    private GamePiece[][] gamePieceBoard = new GamePiece[4][4]; // Holds the reference to all Squirrel and Flower instances on gameBoardPanel
+    private GamePiece[][] holesBoard = new GamePiece[4][4]; // Holes the reference to all Hole instances on gameBoardPanel
+    private GamePiece selectedObject; // Holds a reference to the selected Squirrel instance
+    /**
+     * Constructs a new instance of {@code GameBoard}, initializing references to the {@code JFrame} 
+     * and initialising the {@code Panels} and {@code Empty Board}.
+     * @param cacheNoisetteJFrame The main program JFrame, used to place Swing components inside.
+     */
     public GameBoard(JFrame cacheNoisetteJFrame){
         this.cacheNoisetteJFrame = cacheNoisetteJFrame;
         initialisePanel();
         initialiseEmptyBoards();
     }
+    /**
+     * Initialises all {@code JPanels} for the {@code GameBoard} and creates four instances of {@code MovementButton} for each direction.
+     * These MovementButtons are added to a JPanel.
+     */
     private void initialisePanel(){
         MovementButton northButton = new MovementButton(this, Direction.NORTH, MovementButton.Size.LARGE);
         MovementButton southButton = new MovementButton(this, Direction.SOUTH, MovementButton.Size.LARGE);
@@ -41,6 +51,10 @@ public class GameBoard{
         gameBoardPanel.add(westButton, BorderLayout.WEST);
         gameBoardPanel.add(centerPanel, BorderLayout.CENTER);
     }
+    /**
+     * Initialises the {@code centerPanel} with 4x4 grid of {@code JButtons}, each button is assigned an {@code ImageIcon}.
+     * Initialises the {@code GameBoard} to empty state with only {@code Hole} and {@code Empty Button} instances.
+     */
     public void initialiseEmptyBoards(){
 
         // Initialise Empty 2D arrays with Objects and JButtons
@@ -80,13 +94,22 @@ public class GameBoard{
             System.err.println("An error occurred: " + e.getMessage());
         }
     }
+    /**
+     * Clears the {@code centerPanel} of all Swing components and clears all {@code Array2D}.
+     */
     public void clearGameBoard(){
         centerPanel.removeAll();
         buttonBoard = new JButton[4][4];
         gamePieceBoard = new GamePiece[4][4];
         holesBoard = new GamePiece[4][4];
-
     }
+    /**
+     * Places a {@code GamePiece} instance on the {@code GameBoard} as specified coordinates.
+     * @param piece The GamePiece instance to place on the GameBoard.
+     * @param x The integer X coordinate to place the GamePiece.
+     * @param y The integer Y coordinate to place the GamePiece.
+     * @param size The integer Size of the GamePiece.
+     */
     public void placePiece(GamePiece piece, int x, int y, int size){
         if (piece instanceof Hole) {
             holesBoard[y][x] = piece;
@@ -109,6 +132,10 @@ public class GameBoard{
         buttonBoard[y][x].repaint();
         refreshFrame();
     }
+    /**
+     * Removes an instance of {@code GamePiece} from the {@code GameBoard}.
+     * @param piece The GamePiece instance to remove.
+     */
     public void removePiece(GamePiece piece){
         if (piece instanceof Squirrel) {
             Squirrel squirrel = (Squirrel) piece;
@@ -135,10 +162,23 @@ public class GameBoard{
         }
         refreshFrame();
     }
+    /**
+     * Updates the image of a {@code JButton} at specified coordiantes with new {@code Picture} instance.
+     * @param x The integer X coordinate of JButton.
+     * @param y The integer Y coordinate of JButton.
+     * @param picture The Picture instance to update JButton with.
+     */
     public void updateImageAt(int x, int y, Picture picture){
         buttonBoard[y][x].setIcon(picture);
         refreshFrame();
     }
+    /**
+     * Determines whether an instance of {@code Squirrel} with a nut and {@code Hole} without a nut overlap.
+     * If these {@code GamePiece} instances overlap and meet conditions, their respective dropNut() and placeNut()
+     * methods are called and {@code LevelController} {@code checkWinConditions()} is called.
+     * @param x The X coordinate on the GameBoard
+     * @param y The Y coordinate on the GameBoard
+     */
     public void checkNuts(int x, int y){
         GamePiece[] gamePieces = (GamePiece[]) getPiecesAt(x, y);
         Squirrel squirrel = (Squirrel) gamePieces[0];
@@ -161,6 +201,9 @@ public class GameBoard{
         System.out.println("Success: Placed Nut In Hole");
         levelController.checkWinConditions();
     }
+    /**
+     * Ensures that {@code gameBoardPanel} is added to {@code cacheNoisetteJFrame} and that the {@code JFrame} is {@code revalidate()} and {@code repaint()} with changes.
+     */
     public void refreshFrame(){
         BorderLayout layout = (BorderLayout) cacheNoisetteJFrame.getLayout();
         if (layout.getLayoutComponent(BorderLayout.CENTER) != gameBoardPanel) {
