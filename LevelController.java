@@ -4,18 +4,21 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LevelController {    
-    private GameBoard gameBoard; // Reference to GameBoard to access methods
+    private GameBoard gameBoard; // Reference to GameBoard Object to access methods
+    private MenuController menuController; // Reference to MenuController Object to access methods
     private String activeLevelPath; // Current file path to active level
     private int currentLevelNum = 1; // Current level number. Set to 1 By default.
-    private int numberSquirrels; // Number of squirrels active. 
+    private int numberSquirrels = 0; // Number of squirrels active. 
     private int nutsCollected = 0; // Number of nuts collected by user. Set to 0 by default.
 
     /**
      * Constructor for LevelController. Creates a reference to gameBoard to allow the class to control the same gameBoard.
      * @param gameBoard
      */
-    public LevelController(GameBoard gameBoard){
+    public LevelController(GameBoard gameBoard, MenuController menuController){
         this.gameBoard = gameBoard;
+        this.menuController = menuController;
+        gameBoard.setLevelController(this);
     }
 
     /**
@@ -150,8 +153,8 @@ public class LevelController {
                                 System.out.println("Black Squirrel Head Detected with rotation " + rgbArray[i][1]);
                                 gameBoard.placePiece(new Squirrel(Colour.BLACK, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
                             }
-                            numberSquirrels++;
                         }
+                        numberSquirrels++;
                     } else if (red == 237 && green == 28 && blue == 36) {
                         System.out.println("Flower Space Detected");
                         gameBoard.placePiece(new Flower(), col/4, row/4, 1);
@@ -164,8 +167,11 @@ public class LevelController {
         System.out.println("Processing Complete");
     }
     public void checkWinConditions(){
-        if (numberSquirrels == nutsCollected) {
-            // Win Condition Met
+        nutsCollected++;
+        System.out.println("Nut collected. LevelController count: " + nutsCollected);
+        if (nutsCollected == numberSquirrels) {
+            System.out.println("Win Condition Met");
+            menuController.createPopUp("You Win!", "Congratulations, You have beaten the level!\nAccess more levels via the menu at the top.");
             
         }
     }

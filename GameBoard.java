@@ -10,6 +10,7 @@ import javax.swing.*;
 
 public class GameBoard{
     protected JFrame cacheNoisetteJFrame;
+    protected LevelController levelController;
 
     private JPanel gameBoardPanel = new JPanel();
     private JPanel centerPanel = new JPanel();
@@ -162,6 +163,7 @@ public class GameBoard{
         squirrel.dropNut();
         updateImageAt(x, y, squirrel.getPictures()[0]);
         System.out.println("Success: Placed Nut In Hole");
+        levelController.checkWinConditions();
     }
     public void refreshFrame(){
         BorderLayout layout = (BorderLayout) cacheNoisetteJFrame.getLayout();
@@ -186,5 +188,8 @@ public class GameBoard{
         if (pieces[0] instanceof Squirrel) {
             selectedObject = pieces[0];
         }
+    }
+    public void setLevelController(LevelController levelController){
+        this.levelController = levelController;
     }
 }
