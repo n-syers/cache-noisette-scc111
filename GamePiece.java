@@ -8,7 +8,9 @@ import java.awt.Point;
  * @see Flower
  */
 public abstract class GamePiece {
-    protected GameBoard gameBoard; // Reference to GameBoard for all pieces.
+    
+    // Reference to GameBoard for all pieces.
+    protected GameBoard gameBoard;
     
     /**
      * Retrieves an array of type {@code Picture} of a {@code GamePiece} instance.

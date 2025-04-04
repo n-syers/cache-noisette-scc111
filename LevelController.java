@@ -20,7 +20,6 @@ public class LevelController {
      * and MenuController, sets default values for variables, and parses reference of
      * this LevelController instance to gameBoard.
      * @param gameBoard      The GameBoard instance that manages the game state and UI components.
-     * @param menuController The MenuController instance that handles menu interactions.
      */
     public LevelController(GameBoard gameBoard){
         this.gameBoard = gameBoard;
@@ -148,6 +147,9 @@ public class LevelController {
         }
         System.out.println("Processing Complete");
     }
+    /**
+     * Checks whether the win conditions have been met. If so, generates a popup {@code JFrame} from {@code menuController}.
+     */
     public void checkWinConditions(){
         nutsCollected++;
         System.out.println("Nut collected. LevelController count: " + nutsCollected);

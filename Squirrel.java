@@ -30,6 +30,10 @@ public class Squirrel extends GamePiece{
      * Constructs a new instance of the {@code Squirrel} class with a specified {@code colour} enum and direction.
      * @param colour The colour enum of the squirrel.
      * @param direction The direction the squirrel is facing.
+     * @param x The X coordinate of headPoint
+     * @param y The Y coordinate of headPoint
+     * @param size The size of the Squirrel (2 or 3)
+     * @param gameBoard // The Existing GameBoard instance to reference
      */
     public Squirrel(Colour colour, Direction direction, int x, int y, int size, GameBoard gameBoard){
         this.gameBoard = gameBoard;

@@ -22,6 +22,7 @@ public class MenuController{
     /**
      * Constructs a {@code MenuController} instance.
      * Initializes a reference to a {@code Driver JFrame} where the menus will be added.
+     * @param cacheNoisetteJFrame A reference to the main JFrame for the program
      */
     public MenuController(JFrame cacheNoisettJFrame){
         this.cacheNoisettJFrame = cacheNoisettJFrame;
@@ -30,7 +31,6 @@ public class MenuController{
     /**
      * Creates a {@code JLabel} with a specified text and preset formats.
      * @param titleString The text inside of the label.
-     * @return The JLabel after formatting.
      */
     public void createTitleLabel(String titleString){
         JLabel titleLabel = new JLabel(titleString);
