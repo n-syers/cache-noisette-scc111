@@ -1,5 +1,12 @@
 import java.awt.Point;
 
+/**
+ * This class represents a {@code flower} in the game, which extends the {@code GamePiece} abstract class.
+ * This class defines the behaviour, attributes, and actions a flower instance can perform within
+ * the game. 
+ * 
+ * @see GamePiece
+ */
 public class Flower extends GamePiece{
     private int size = 1; // size of the GamePiece on the board
     private Picture[] imageArray = new Picture[]{new Picture("assets\\icons\\Flower.png", 0)}; // Array of Pictures
