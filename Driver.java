@@ -4,10 +4,16 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 /**
- * This class holds the main() for all other files but also initialises a JFrame for all components to be added to.
+ * This class represents an instance of {@code Cache Noisette Game} program.
+ * This class holds the {@code main()} method for the whole program.
  */
 public class Driver {
     private static JFrame cacheNoisetteJFrame = new JFrame("Cache Noisette Game"); // Initialise a JFrame with Title accessible via all classes.
+    /**
+     * The main entry point of the Cache Noisette Game program.
+     * Initializes and starts the game with relevant classes.
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Dimension windowSize = new Dimension(700, 800); // Size of Window
         GameBoard gameBoard = new GameBoard(cacheNoisetteJFrame);
