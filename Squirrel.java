@@ -1,5 +1,12 @@
 import java.awt.Point;
 
+/**
+ * This class represents a {@code squirrel} in the game, which extends the {@code GamePiece} abstract class.
+ * This class defines the behaviour, attributes, and actions a squirrel instance can perform within
+ * the game. 
+ * 
+ * @see GamePiece
+ */
 public class Squirrel extends GamePiece{
     private GameBoard gameBoard; // GameBoard reference. used to call functions.
     private Picture[] imageArray; // Array of Pictures used by the squirrel
@@ -9,6 +16,9 @@ public class Squirrel extends GamePiece{
     private Point headPoint; // Position of the head on the board
     private Boolean hasNut = true; // Boolean for the squirrel holding nut
 
+    /**
+     * Static Enum to represent squirrel colours.
+     */
     public static enum Colour {
         BLACK,
         BROWN,
@@ -17,9 +27,8 @@ public class Squirrel extends GamePiece{
     }
 
     /**
-     * Constructor for squirrel class. Creates a new instance of the Squirrel class based on a colour in the given
-     * direction.
-     * @param colour The colour of the squirrel.
+     * Constructs a new instance of the {@code Squirrel} class with a specified {@code colour} enum and direction.
+     * @param colour The colour enum of the squirrel.
      * @param direction The direction the squirrel is facing.
      */
     public Squirrel(Colour colour, Direction direction, int x, int y, int size, GameBoard gameBoard){
@@ -36,10 +45,12 @@ public class Squirrel extends GamePiece{
         setPictures(colour, rotation);
         setPoints(colour, direction);
     }
+    
     /**
-     * This function initialises imageArray with Pictures based on a switch case for colour.
-     * @param colour The colour of the squirrel.
-     * @param rotation The rotation of the picture once squirrel colour is determined.
+     * Initialises {@code imageArray} and {@code activePictures} with {@code Pictures}
+     * based on a switch case for colour.
+     * @param colour The colour enum attached to the squirrel instance.
+     * @param rotation The rotation in degrees the pictures should be displayed.
      */
     public void setPictures(Colour colour, int rotation){
         switch (colour) {
@@ -80,9 +91,9 @@ public class Squirrel extends GamePiece{
     }
 
     /**
-     * This function initialises piecePositions with Points based of direction and colour.
-     * @param colour
-     * @param direction
+     * Initialises {@code piecePositions} with {@code Points} based on squirrel direction and colour.
+     * @param colour The colour enum attached to the squirrel instance.
+     * @param direction The direction enum the squirrel is facing
      */
     public void setPoints(Colour colour, Direction direction){
         piecePositions = new Point[size];
@@ -131,13 +142,21 @@ public class Squirrel extends GamePiece{
     }
 
     /**
-     * Returns a boolean value for if the squirrel has a nut (hasNut)
-     * @return hasNut boolean.
+     * Returns a {@code boolean} indicating whether the squirrel has a nut.
+     * @return {@code true} if the squirrel has a nut, {@code false} otherwise.
      */
     public Boolean isCarryingNut(){
         return hasNut;
     }
 
+    /**
+     * Determines if a {@code squirrel} instance can move in a given direction.
+     * Checks if piece will collide with other {@code GamePieces} or will exceed
+     * board (X,Y) limits.
+     * @param x The new {@code headPoint X} coordinate.
+     * @param y The new {@code headPoint Y} coordinate.
+     * @return {@code true} if the move is legal, {@code false} otherwise.
+     */
     public Boolean canMove(int x, int y){
         GamePiece[][] gamePieceBoard = (GamePiece[][]) gameBoard.getPiecesBoard();
         Boolean isLegal = true;
@@ -160,6 +179,11 @@ public class Squirrel extends GamePiece{
         }
         return isLegal;
     }
+    /**
+     * Moves an instance of {@code Squirrel} in the specified {@code direction}.
+     * @param direction The {@code Direction} enum in which to move the {@code Squirrel}. 
+     * @see Direction for possible movements. 
+     */
     public void move(Direction direction){
         int newX = 0;
         int newY = 0;
@@ -193,8 +217,7 @@ public class Squirrel extends GamePiece{
         gameBoard.checkNuts(newX, newY);
     }
     /**
-     * Changes the head image to display without nut. Sets hasNut to false. Calls hasNut() in Hole class.
-     * @param hole The hole that has placeNut() called.
+     * Changes {@code activePictures[0]} to {@code imageArray[0]}, while also setting {@code hasNut} to false.
      */
     public void dropNut(){
         hasNut = false;
