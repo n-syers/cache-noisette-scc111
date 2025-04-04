@@ -124,16 +124,16 @@ public class LevelController {
                             blue = rgbArray[i][0] & 0xFF;
                             if (red == 255 && green == 127 && blue == 39) {
                                 System.out.println("Red Squirrel Head Space Detected with rotation " + rgbArray[i][1]);
-                                gameBoard.placePiece(new Squirrel(Colour.RED, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2, gameBoard), col/4, row/4, 2);
+                                gameBoard.placePiece(new Squirrel(Squirrel.Colour.RED, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2, gameBoard), col/4, row/4, 2);
                             } else if (red == 195 && green == 195 && blue == 195) {
                                 System.out.println("Grey Squirrel Head Space Detected with rotation " + rgbArray[i][1]);
-                                gameBoard.placePiece(new Squirrel(Colour.GREY, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2, gameBoard), col/4, row/4, 2);
+                                gameBoard.placePiece(new Squirrel(Squirrel.Colour.GREY, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 2, gameBoard), col/4, row/4, 2);
                             } else if (red == 239 && green == 228 && blue == 176) {
                                System.out.println("Brown Squirrel Head Space Detected with rotation " + rgbArray[i][1]);
-                               gameBoard.placePiece(new Squirrel(Colour.BROWN, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
+                               gameBoard.placePiece(new Squirrel(Squirrel.Colour.BROWN, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
                             } else if (red == 0 && green == 0 && blue == 0) {
                                 System.out.println("Black Squirrel Head Detected with rotation " + rgbArray[i][1]);
-                                gameBoard.placePiece(new Squirrel(Colour.BLACK, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
+                                gameBoard.placePiece(new Squirrel(Squirrel.Colour.BLACK, Direction.getDirection(rgbArray[i][1]), col/4, row/4, 3, gameBoard), col/4, row/4, 3);
                             }
                         }
                         numberSquirrels++;

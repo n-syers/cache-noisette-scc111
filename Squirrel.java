@@ -9,6 +9,13 @@ public class Squirrel extends GamePiece{
     private Point headPoint; // Position of the head on the board
     private Boolean hasNut = true; // Boolean for the squirrel holding nut
 
+    public static enum Colour {
+        BLACK,
+        BROWN,
+        GREY,
+        RED
+    }
+
     /**
      * Constructor for squirrel class. Creates a new instance of the Squirrel class based on a colour in the given
      * direction.
