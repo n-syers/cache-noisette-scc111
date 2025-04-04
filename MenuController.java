@@ -16,7 +16,7 @@ import javax.swing.border.BevelBorder;
  */
 public class MenuController{
     private LevelController levelController; // A reference to the LevelController for the program
-    private JFrame cacheNoisettJFrame; // A reference to the main JFrame for the program
+    private JFrame cacheNoisetteJFrame; // A reference to the main JFrame for the program
     private JPanel buttonMenu = new JPanel(); // Empty JPanel. Populated in createButtonMenu()
 
     /**
@@ -24,8 +24,8 @@ public class MenuController{
      * Initializes a reference to a {@code Driver JFrame} where the menus will be added.
      * @param cacheNoisetteJFrame A reference to the main JFrame for the program
      */
-    public MenuController(JFrame cacheNoisettJFrame){
-        this.cacheNoisettJFrame = cacheNoisettJFrame;
+    public MenuController(JFrame cacheNoisetteJFrame){
+        this.cacheNoisetteJFrame = cacheNoisetteJFrame;
     }
     
     /**
@@ -39,11 +39,11 @@ public class MenuController{
         titleLabel.setMaximumSize(new Dimension(200, 75));
         titleLabel.setMinimumSize(new Dimension(200, 75));
         titleLabel.setPreferredSize(new Dimension(200, 75));
-        cacheNoisettJFrame.add(titleLabel, BorderLayout.NORTH);
+        cacheNoisetteJFrame.add(titleLabel, BorderLayout.NORTH);
 
         // Refresh Frame
-        cacheNoisettJFrame.revalidate();
-        cacheNoisettJFrame.repaint();
+        cacheNoisetteJFrame.revalidate();
+        cacheNoisetteJFrame.repaint();
     }
     /**
      * Creates a {@code JPanel} containing the main navigation buttons for the user.
@@ -83,16 +83,16 @@ public class MenuController{
 
         // Add buttonGroup to initialPlayMenu
         buttonMenu.add(buttonGroup, new GridBagConstraints());
-        cacheNoisettJFrame.add(buttonMenu, BorderLayout.CENTER);
+        cacheNoisetteJFrame.add(buttonMenu, BorderLayout.CENTER);
 
         // Refresh Frame
-        cacheNoisettJFrame.revalidate();
-        cacheNoisettJFrame.repaint();
+        cacheNoisetteJFrame.revalidate();
+        cacheNoisetteJFrame.repaint();
     }
 
     /**
      * Creates a {@code JMenuBar} with two menus ("Game" and "Select Level")
-     * The Game menu contains two buttons to quit game and restart program. 
+     * The Game menu contains a button to quit game. 
      * The Select Level menu dynamically populates based on the {@code .BMP} files 
      * found in the {@code assets/levels/} directory.
      */
@@ -102,14 +102,11 @@ public class MenuController{
         // Game Menu
 
         JMenu gameMenu = new JMenu("Game"); // Menu to hold extra functions buttons
-        JMenuItem restartGameStateMenuItem = new JMenuItem("Restart Game State"); // Button to reset program to initial state
         JMenuItem quitMenuItem = new JMenuItem("Quit Game"); // Button to quit the program
 
         gameMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
-        restartGameStateMenuItem.addActionListener(e -> System.out.println("Restarting Game State"));
         quitMenuItem.addActionListener(e -> quitGame());
 
-        gameMenu.add(restartGameStateMenuItem);
         gameMenu.add(quitMenuItem);
 
         // Select Level Menu
@@ -147,11 +144,11 @@ public class MenuController{
         gameMenuBar.add(levelSelectorMenu);
 
         // Set the JFrame's JMenuBar to gameMenuBar
-        cacheNoisettJFrame.setJMenuBar(gameMenuBar);
+        cacheNoisetteJFrame.setJMenuBar(gameMenuBar);
 
         // Refresh Frame
-        cacheNoisettJFrame.revalidate();
-        cacheNoisettJFrame.repaint();
+        cacheNoisetteJFrame.revalidate();
+        cacheNoisetteJFrame.repaint();
     }
     
     /**
@@ -201,9 +198,9 @@ public class MenuController{
      * @param levelNumber The number of the level to load
      */
     private void loadLevel(int levelNumber){
-        cacheNoisettJFrame.remove(buttonMenu);
-        cacheNoisettJFrame.revalidate();
-        cacheNoisettJFrame.repaint();
+        cacheNoisetteJFrame.remove(buttonMenu);
+        cacheNoisetteJFrame.revalidate();
+        cacheNoisetteJFrame.repaint();
 
         levelController.loadLevel(levelNumber);
     }
@@ -213,9 +210,9 @@ public class MenuController{
      * the {@code LevelController}
      */
     private void loadCustomLevel(){
-        cacheNoisettJFrame.remove(buttonMenu);
-        cacheNoisettJFrame.revalidate();
-        cacheNoisettJFrame.repaint();
+        cacheNoisetteJFrame.remove(buttonMenu);
+        cacheNoisetteJFrame.revalidate();
+        cacheNoisetteJFrame.repaint();
         levelController.loadCustomLevel();
     }
 
