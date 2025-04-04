@@ -176,8 +176,9 @@ public class Squirrel extends GamePiece{
             default:
                 break;
         }
-        if (!(canMove(newX, newY) == true)) {
+        if (!(canMove(newX, newY))) {
             System.out.println("An Error Occured: Illegal Move!");
+            return;
         }
         gameBoard.removePiece(this);
         setPosition(newX, newY);
