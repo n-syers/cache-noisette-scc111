@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 public class GameBoard{
     protected JFrame cacheNoisetteJFrame;
