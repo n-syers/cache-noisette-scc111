@@ -22,7 +22,7 @@ public class MenuController{
     public MenuController(JFrame cacheNoisettJFrame, GameBoard gameBoard){
         this.cacheNoisettJFrame = cacheNoisettJFrame;
         this.gameBoard = gameBoard;
-        this.levelController = new LevelController(gameBoard);
+        this.levelController = new LevelController(gameBoard, this);
     }
     
     /**
@@ -43,7 +43,9 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
-    
+    /**
+     * This function creates a JPanel with the main buttons for the user to navigate. This funciton adds the buttonMenu to the JFrame.
+     */
     public void createButtonMenu(){
         buttonMenu = new JPanel(); // Holds all JSwing Objects for Main Menu
         JPanel buttonGroup = new JPanel(); // Holds both main menu buttons.
@@ -146,6 +148,11 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
     }
+    public void createPopUp(String titleString, String bodyString){
+        JPopupMenu popupMenu = new JPopupMenu(titleString);
+        popupMenu.add(bodyString);
+        popupMenu.setVisible(true);
+    }
     /**
      * Exits the program with status code 0
      */
@@ -153,7 +160,6 @@ public class MenuController{
         System.out.println("Exiting Program, Goodbye!");
         System.exit(0);
     }
-
     /**
      * Removes buttonMenu and initiates levelController to load a level.
      * @param levelNumber The number of the level to load
