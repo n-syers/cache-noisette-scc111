@@ -3,20 +3,29 @@ import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * This class manages the core logic between the GameBoard and MenuController.
+ * Responsible for handling user input and updating the game state. 
+ * This class also handles the processing of BufferedImage data to load levels.
+ */
 public class LevelController {    
     private GameBoard gameBoard; // Reference to GameBoard Object to access methods
     private MenuController menuController; // Reference to MenuController Object to access methods
     private String activeLevelPath; // Current file path to active level
-    private int numberSquirrels = 0; // Number of squirrels active. 
-    private int nutsCollected = 0; // Number of nuts collected by user. Set to 0 by default.
+    private int numberSquirrels; // Number of squirrels active
+    private int nutsCollected; // Number of nuts collected by user
 
     /**
-     * Constructor for LevelController. Creates a reference to gameBoard to allow the class to control the same gameBoard.
-     * @param gameBoard
+     * Constructs a new instance of the class, initializing references to the GameBoard 
+     * and MenuController, sets default values for variables, and parses reference of
+     * this LevelController instance to gameBoard.
+     * @param gameBoard      The GameBoard instance that manages the game state and UI components.
+     * @param menuController The MenuController instance that handles menu interactions.
      */
-    public LevelController(GameBoard gameBoard, MenuController menuController){
+    public LevelController(GameBoard gameBoard){
         this.gameBoard = gameBoard;
-        this.menuController = menuController;
+        this.numberSquirrels = 0;
+        this.nutsCollected = 0;
         gameBoard.setLevelController(this);
     }
 
@@ -32,7 +41,7 @@ public class LevelController {
             File file = new File("assets/levels/level"+levelNumber+".bmp");
             activeLevelPath = file.getPath();
             BufferedImage bufferedImage = FileManager.readBitmapAsBufferedImage(activeLevelPath);
-            loadData(bufferedImage);
+            loadDataFromBufferedImage(bufferedImage);
         } catch (Exception e) {
             System.err.println("(LEVELCONTROLLER::loadLevel) An error occurred: " + e.getMessage());
         }
@@ -49,7 +58,7 @@ public class LevelController {
         try {
             System.out.println("Loading Custom Level...");
             BufferedImage bufferedImage = FileManager.readBitmapAsBufferedImage(levelFilePath);
-            loadData(bufferedImage);
+            loadDataFromBufferedImage(bufferedImage);
         } catch (Exception e) {
             System.err.println("(LEVELCONTROLLER::loadLevelFromFilePath) An error occurred: " + e.getMessage());
         }
@@ -76,7 +85,7 @@ public class LevelController {
      * This function loads data from a buffered image and initiates the level creation process
      * @param bufferedImage The image that is loaded
      */
-    private void loadData(BufferedImage bufferedImage){
+    private void loadDataFromBufferedImage(BufferedImage bufferedImage){
         try {
             System.out.println("Processing Level Data...");
             numberSquirrels = 0;
@@ -146,5 +155,13 @@ public class LevelController {
      */
     public void restartLevel(){
         loadLevelFromFilePath(activeLevelPath);
+    }
+    /**
+     * Sets the reference to a MenuController instance.
+     * Allowing the LevelController to communicate with the MenuController.
+     * @param menuController The MenuController instance to be referenced
+     */
+    public void setMenuController(MenuController menuController){
+        this.menuController = menuController;
     }
 }

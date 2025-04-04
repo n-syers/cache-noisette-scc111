@@ -10,7 +10,6 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 public class MenuController{
-    protected GameBoard gameBoard;
     private LevelController levelController;
     private JFrame cacheNoisettJFrame;
     private JPanel buttonMenu = new JPanel(); // Empty JPanel. Populated in createButtonMenu()
@@ -19,10 +18,8 @@ public class MenuController{
      * Constructor for MenuController.
      * Creates a reference to a JFrame for the menus to be added to.
      */
-    public MenuController(JFrame cacheNoisettJFrame, GameBoard gameBoard){
+    public MenuController(JFrame cacheNoisettJFrame){
         this.cacheNoisettJFrame = cacheNoisettJFrame;
-        this.gameBoard = gameBoard;
-        this.levelController = new LevelController(gameBoard, this);
     }
     
     /**
@@ -193,5 +190,14 @@ public class MenuController{
         cacheNoisettJFrame.revalidate();
         cacheNoisettJFrame.repaint();
         levelController.loadCustomLevel();
+    }
+
+    /**
+     * Sets the reference to a LevelController instance.
+     * Allowing the MenuController to communicate with the LevelController.
+     * @param levelController The LevelController instance to be referenced
+     */
+    public void setLevelController(LevelController levelController){
+        this.levelController = levelController;
     }
 }

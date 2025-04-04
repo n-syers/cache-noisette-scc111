@@ -11,8 +11,13 @@ public class Driver {
     public static void main(String[] args) {
         Dimension windowSize = new Dimension(700, 800); // Size of Window
         GameBoard gameBoard = new GameBoard(cacheNoisetteJFrame);
-        MenuController menuController = new MenuController(cacheNoisetteJFrame, gameBoard);
-        
+        MenuController menuController = new MenuController(cacheNoisetteJFrame);
+        LevelController levelController = new LevelController(gameBoard);
+
+        //Set circular dependencies
+        menuController.setLevelController(levelController);
+        levelController.setMenuController(menuController);
+
         //initialise the JFrame to hold all game content
         cacheNoisetteJFrame.setVisible(true);
         cacheNoisetteJFrame.setSize(windowSize);
