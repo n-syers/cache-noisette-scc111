@@ -212,22 +212,44 @@ public class GameBoard{
         cacheNoisetteJFrame.revalidate();
         cacheNoisetteJFrame.repaint();
     }
+    /**
+     * Retrieves the {@code selectedGamePiece} attribute.
+     * @return A {@code GamePiece} reference of {@code selectedGamePiece} 
+     */
     public GamePiece getSelectedGamePiece(){
         return selectedObject;
     }
+    /**
+     * Retrieves a reference to {@code gamePieceBoard}
+     * @return A {@code GamePiece[][]} reference of {@code gamePieceBoard} 
+     */
     public GamePiece[][] getPiecesBoard(){
         return gamePieceBoard;
     }
+    /**
+     * Retrieves a {@code GamePiece} Array of size 2 with {@code GamePiece} instances from {@code gamePieceBoard} and {@code holesBoard} at specified coordinates.
+     * @param x The X coordinate to get {@code GamePiece} instances from.
+     * @param y The Y coordinate to get {@code GamePiece} instances from.
+     * @return An array of size 2 of {@code GamePiece} instances.
+     */
     public GamePiece[] getPiecesAt(int x, int y){
         GamePiece[] pieces = new GamePiece[]{gamePieceBoard[y][x], holesBoard[y][x]};
         return pieces;
     }
+    /**
+     * Privatly processes a {@code JButton} press from {@code buttonBoard} given it's {@code Point}.
+     * @param point The {@code Point} associated with the {@code JButton} in {@code buttonBoard}
+     */
     private void processButtonPress(Point point){
         GamePiece[] pieces = (GamePiece[]) getPiecesAt((int) point.getX(), (int) point.getY());
         if (pieces[0] instanceof Squirrel) {
             selectedObject = pieces[0];
         }
     }
+    /**
+     * Initalises {@code levelController} with a reference to an existing {@code LevelController}
+     * @param levelController The existing {@code LevelController} to reference
+     */
     public void setLevelController(LevelController levelController){
         this.levelController = levelController;
     }
