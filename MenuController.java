@@ -164,7 +164,7 @@ public class MenuController{
 
         //Set JFrame Properties 
         popupFrame.setSize(new Dimension(300,200));
-        popupFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        popupFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         popupFrame.setLocationRelativeTo(null);
 
         // Add Action Listener To Button
