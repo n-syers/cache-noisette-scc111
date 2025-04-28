@@ -79,8 +79,9 @@ public class LevelController {
         int userSelection = fileChooser.showOpenDialog(null);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                loadLevelFromFilePath(selectedFile.getAbsolutePath());
+                activeLevelPath = selectedFile.getAbsolutePath();
+                System.out.println("Selected file: " + activeLevelPath);
+                loadLevelFromFilePath(activeLevelPath);
         } else {
                 System.out.println("No file selected");
         }
