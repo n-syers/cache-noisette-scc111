@@ -11,7 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class LevelController {    
     private GameBoard gameBoard; // Reference to GameBoard Object to access methods
     private MenuController menuController; // Reference to MenuController Object to access methods
-    private String activeLevelPath; // Current file path to active level
+    private String activeLevelPath = ""; // Current file path to active level
     private int numberSquirrels; // Number of squirrels active
     private int nutsCollected; // Number of nuts collected by user
 
@@ -164,6 +164,10 @@ public class LevelController {
      * Restarts the current level by calling {@code loadLevel()} with the {@code activeLevelPath} to reload the level.
      */
     public void restartLevel(){
+        if (activeLevelPath == ""){
+            System.err.println("(LEVELCONTROLLER::restartLevel) An error occurred: No level active to restart");
+            return;
+        }
         loadLevelFromFilePath(activeLevelPath);
     }
     /**
