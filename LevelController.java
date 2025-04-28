@@ -39,7 +39,7 @@ public class LevelController {
         gameBoard.initialiseEmptyBoards();
         try {
             System.out.println("Loading Level " + levelNumber);
-            File file = new File("assets/levels/level"+levelNumber+".bmp");
+            File file = new File("./assets/levels/level"+levelNumber+".bmp");
             activeLevelPath = file.getPath();
             BufferedImage bufferedImage = FileManager.readBitmapAsBufferedImage(activeLevelPath);
             loadDataFromBufferedImage(bufferedImage);

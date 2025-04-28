@@ -134,7 +134,6 @@ public class GameBoard{
         }    
         buttonBoard[y][x].revalidate();
         buttonBoard[y][x].repaint();
-        refreshFrame();
     }
     /**
      * Removes an instance of {@code GamePiece} from the {@code GameBoard}.
@@ -164,7 +163,6 @@ public class GameBoard{
                 buttonBoard[y][x].repaint();
             }
         }
-        refreshFrame();
     }
     /**
      * Updates the image of a {@code JButton} at specified coordiantes with new {@code Picture} instance.
