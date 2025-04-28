@@ -9,7 +9,7 @@ import java.awt.Point;
  */
 public class Flower extends GamePiece{
     private int size = 1; // size of the GamePiece on the board
-    private Picture[] imageArray = new Picture[]{new Picture("assets\\icons\\Flower.png", 0)}; // Array of Pictures
+    private Picture[] imageArray = new Picture[]{new Picture("./assets/icons/Flower.png", 0)}; // Array of Pictures
     private Point[] piecePositions = new Point[]{new Point(0,0)}; // Array of gamePiece positions.
     private Point headPoint; // Position of the head on the board
 

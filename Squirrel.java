@@ -59,31 +59,31 @@ public class Squirrel extends GamePiece{
     public void setPictures(Colour colour, int rotation){
         switch (colour) {
             case BLACK:
-                imageArray[0] = new Picture("assets\\icons\\BlackSquirrel1.png", rotation);
-                imageArray[1] = new Picture("assets\\icons\\BlackSquirrel1Nut.png", rotation);
-                imageArray[2] = new Picture("assets\\icons\\BlackSquirrel2.png", rotation);
-                imageArray[3] = new Picture("assets\\icons\\SquirrelFlower.png", rotation);
+                imageArray[0] = new Picture("./assets/icons/BlackSquirrel1.png", rotation);
+                imageArray[1] = new Picture("./assets/icons/BlackSquirrel1Nut.png", rotation);
+                imageArray[2] = new Picture("./assets/icons/BlackSquirrel2.png", rotation);
+                imageArray[3] = new Picture("./assets/icons/SquirrelFlower.png", rotation);
                 activePictures[2] = imageArray[3];
                 break;
 
             case BROWN:
-                imageArray[0] = new Picture("assets\\icons\\BrownSquirrel1.png", rotation);
-                imageArray[1] = new Picture("assets\\icons\\BrownSquirrel1Nut.png", rotation);
-                imageArray[2] = new Picture("assets\\icons\\BrownSquirrel2.png", rotation);
-                imageArray[3] = new Picture("assets\\icons\\SquirrelFlower.png", rotation);
+                imageArray[0] = new Picture("./assets/icons/BrownSquirrel1.png", rotation);
+                imageArray[1] = new Picture("./assets/icons/BrownSquirrel1Nut.png", rotation);
+                imageArray[2] = new Picture("./assets/icons/BrownSquirrel2.png", rotation);
+                imageArray[3] = new Picture("./assets/icons/SquirrelFlower.png", rotation);
                 activePictures[2] = imageArray[3];
                 break;
 
             case GREY:
-                imageArray[0] = new Picture("assets\\icons\\GreySquirrel1.png", rotation);
-                imageArray[1] = new Picture("assets\\icons\\GreySquirrel1Nut.png", rotation);
-                imageArray[2] = new Picture("assets\\icons\\GreySquirrel2.png", rotation);
+                imageArray[0] = new Picture("./assets/icons/GreySquirrel1.png", rotation);
+                imageArray[1] = new Picture("./assets/icons/GreySquirrel1Nut.png", rotation);
+                imageArray[2] = new Picture("./assets/icons/GreySquirrel2.png", rotation);
                 break;
 
             case RED:
-                imageArray[0] = new Picture("assets\\icons\\RedSquirrel1.png", rotation);
-                imageArray[1] = new Picture("assets\\icons\\RedSquirrel1Nut.png", rotation);
-                imageArray[2] = new Picture("assets\\icons\\RedSquirrel2.png", rotation);
+                imageArray[0] = new Picture("./assets/icons/RedSquirrel1.png", rotation);
+                imageArray[1] = new Picture("./assets/icons/RedSquirrel1Nut.png", rotation);
+                imageArray[2] = new Picture("./assets/icons/RedSquirrel2.png", rotation);
                 break;
 
             default:

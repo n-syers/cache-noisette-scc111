@@ -64,7 +64,7 @@ public class GameBoard{
         // Initialise Empty 2D arrays with Objects and JButtons
         for (int row = 0; row < buttonBoard.length; row++) {
             for (int col = 0; col < buttonBoard.length; col++) {
-                buttonBoard[row][col] = new JButton(new Picture("cacheNoisetteGame\\assets\\icons\\Empty.png", 0));
+                buttonBoard[row][col] = new JButton(new Picture("./assets/icons/Empty.png", 0));
                 buttonBoard[row][col].setPreferredSize(new Dimension(100, 100));
                 buttonBoard[row][col].setBorder(null);
                 int i = row;
@@ -75,7 +75,7 @@ public class GameBoard{
         }
         try {
             System.out.println("Initialising Empty GameBoard");
-            BufferedImage bufferedImage = FileManager.readBitmapAsBufferedImage("cacheNoisetteGame\\assets\\levels\\blankWithHoles.bmp");
+            BufferedImage bufferedImage = FileManager.readBitmapAsBufferedImage("./assets/levels/blankWithHoles.bmp");
 
             // Check every 3x3 pixels for RGB colour values. 
             for(int row = 0; row < 15; row+=4){
@@ -149,7 +149,7 @@ public class GameBoard{
                 int x = (int) headPoint.getX() + (int) piecePoints[i].getX();
                 int y = (int) headPoint.getY() + (int) piecePoints[i].getY();
                 gamePieceBoard[y][x] = null;
-                buttonBoard[y][x].setIcon(new Picture("cacheNoisetteGame\\assets\\icons\\Empty.png", 0));
+                buttonBoard[y][x].setIcon(new Picture("./assets/icons/Empty.png", 0));
                 GamePiece boardPiece = (GamePiece) getPiecesAt(x, y)[1];
                 if(boardPiece instanceof Hole){
                     Hole hole = (Hole) boardPiece;
