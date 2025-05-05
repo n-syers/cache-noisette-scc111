@@ -122,18 +122,18 @@ public class Squirrel extends GamePiece{
                 break;
             case EAST:
                 if (colour == Colour.BLACK) {
-                    piecePositions[2] = new Point(-1,-1);
+                    piecePositions[2] = new Point(-1,1);
                 } else if (colour == Colour.BROWN) {
-                    piecePositions[2] = new Point(0,-1);
+                    piecePositions[2] = new Point(0,1);
                 }
                 piecePositions[0] = new Point(0,0);
                 piecePositions[1] = new Point(-1,0);
                 break;
             case WEST:
                 if (colour == Colour.BLACK) {
-                    piecePositions[2] = new Point(1,1);
+                    piecePositions[2] = new Point(1,-1);
                 } else if (colour == Colour.BROWN) {
-                    piecePositions[2] = new Point(0,1);
+                    piecePositions[2] = new Point(0,-1);
                 }
                 piecePositions[0] = new Point(0,0);
                 piecePositions[1] = new Point(1,0);
