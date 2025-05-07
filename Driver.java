@@ -15,7 +15,7 @@ public class Driver {
      * @param args Command-line arguments (not used).
      */
     public static void main(String[] args) {
-        Dimension windowSize = new Dimension(700, 800); // Size of Window
+        Dimension windowSize = new Dimension(400, 600); // Size of Window
         GameBoard gameBoard = new GameBoard(cacheNoisetteJFrame);
         MenuController menuController = new MenuController(cacheNoisetteJFrame);
         LevelController levelController = new LevelController(gameBoard);

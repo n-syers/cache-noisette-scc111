@@ -168,6 +168,7 @@ public class Squirrel extends GamePiece{
         for (int i = 0; i < piecePoints.length; i++) {
             int newX = x + (int) piecePoints[i].getX();
             int newY = y + (int) piecePoints[i].getY();
+            // Check that the move is within the bounds of the game board (4x4 grid)
             if (newX < 0 || newX >= 4 || newY < 0 || newY >= 4) {
                 isLegal = false;
                 break;

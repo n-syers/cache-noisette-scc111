@@ -41,18 +41,21 @@ public class GameBoard{
         MovementButton southButton = new MovementButton(this, Direction.SOUTH, MovementButton.Size.LARGE);
         MovementButton eastButton = new MovementButton(this, Direction.EAST, MovementButton.Size.SMALL);
         MovementButton westButton = new MovementButton(this, Direction.WEST, MovementButton.Size.SMALL);
-        centerPanel.setLayout(new GridLayout(4,4,1,1));
+        centerPanel.setLayout(new GridLayout(4,4));
         centerPanel.setPreferredSize(new Dimension(400,400));
         centerPanel.setBackground(Color.BLACK);
 
         gameBoardPanel.setLayout(new BorderLayout());
-        gameBoardPanel.setPreferredSize(new Dimension(600,600));
+        gameBoardPanel.setPreferredSize(new Dimension(400,400));
         gameBoardPanel.setBackground(Color.BLACK);
 
-        gameBoardPanel.add(northButton, BorderLayout.NORTH);
-        gameBoardPanel.add(southButton, BorderLayout.SOUTH);
-        gameBoardPanel.add(eastButton, BorderLayout.EAST);
-        gameBoardPanel.add(westButton, BorderLayout.WEST);
+        JPanel movementButtonsPanel = new JPanel();
+        movementButtonsPanel.setLayout(new GridLayout(1,4));
+        movementButtonsPanel.add(westButton);
+        movementButtonsPanel.add(northButton);
+        movementButtonsPanel.add(southButton);
+        movementButtonsPanel.add(eastButton);
+        gameBoardPanel.add(movementButtonsPanel, BorderLayout.SOUTH);
         gameBoardPanel.add(centerPanel, BorderLayout.CENTER);
     }
     /**

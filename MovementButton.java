@@ -34,12 +34,12 @@ public class MovementButton extends JButton implements ActionListener{
         this.direction = direction;
         switch (arrowSize) {
             case LARGE:
-                arrowPicture = new Picture("./assets/icons/BigArrow.png", direction.getValue(direction));
-                this.setPreferredSize(new Dimension(600,100));
+                arrowPicture = new Picture("./assets/icons/Arrow.png", direction.getValue(direction));
+                this.setPreferredSize(new Dimension(100,100));
                 break;
             case SMALL:
                 arrowPicture = new Picture("./assets/icons/Arrow.png", direction.getValue(direction));
-                this.setPreferredSize(new Dimension(100,400));
+                this.setPreferredSize(new Dimension(100,100));
                 break;
             default:
                 System.out.println("An Error Occured: Could Not Find Arrow Size, Set To Small");
