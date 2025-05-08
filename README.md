@@ -8,6 +8,16 @@ This assignment is to create a **Java Swing** based interactive puzzle game call
 
 Cache Noisettes is a **single player** French game that roughly translates to *Hide the Nuts*. The game involves placing a number of squirrel pieces on a **4x4 grid**, and sliding them (following specific rules) such that they each drop the nut they are carrying into a hole in the gameboard. The squirrel pieces have a tendency to cover the holes.
 
+## How to Compile and Run Cache Noisette
+
+Compiling and running this program is fairly straight forward. Simply follow the following steps:
+1. Download the program files by either cloning or installing the ZIP.
+    - If you installed using .ZIP, you will need to extract all files.
+2. Open a terminal and navigate to **cacheNoisetteGame folder** with the Java scripts.
+    - Navigation can be done via the command ```cd <folder path>```
+3. Once you navigate to **cacheNoisetteGame** folder run the following command ```javac *.java && java Driver```
+    - This command will compile and run the program at the same time.
+    
 ### Image Representation
 ![Image taken from Part-I Summer Project](assets/readme/readme-realGameRepresentation.png)
 
