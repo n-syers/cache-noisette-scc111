@@ -41,7 +41,7 @@ public class GameBoard{
         MovementButton southButton = new MovementButton(this, Direction.SOUTH, MovementButton.Size.LARGE);
         MovementButton eastButton = new MovementButton(this, Direction.EAST, MovementButton.Size.SMALL);
         MovementButton westButton = new MovementButton(this, Direction.WEST, MovementButton.Size.SMALL);
-        centerPanel.setLayout(new GridLayout(4,4));
+        centerPanel.setLayout(new GridLayout(4,4,1,1));
         centerPanel.setPreferredSize(new Dimension(400,400));
         centerPanel.setBackground(Color.BLACK);
 

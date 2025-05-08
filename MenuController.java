@@ -59,9 +59,9 @@ public class MenuController{
         buttonMenu.setLayout(new GridBagLayout());
 
         // Set buttonGroup Properties
-        buttonGroup.setMaximumSize(new Dimension(400, 300));
-        buttonGroup.setMinimumSize(new Dimension(400, 150));
-        buttonGroup.setPreferredSize(new Dimension(400, 150));
+        buttonGroup.setMaximumSize(new Dimension(200, 300));
+        buttonGroup.setMinimumSize(new Dimension(200, 150));
+        buttonGroup.setPreferredSize(new Dimension(200, 150));
         buttonGroup.setLayout(new GridLayout(2, 1, 0, 20));
 
         // Set playButton Properties
