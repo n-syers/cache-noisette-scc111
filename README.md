@@ -1,43 +1,90 @@
 # Cache Noisettes Game
 
+![Java](https://img.shields.io/badge/Language-Java-ED8B00)
+![Swing](https://img.shields.io/badge/GUI-Java_Swing-007396)
+![SCC111](https://img.shields.io/badge/Course-SCC111-8B1E3F)
+![Coursework](https://img.shields.io/badge/Project-University_Coursework-blue)
 
+A Java Swing puzzle game developed for **SCC111 at Lancaster University**. The project combines a desktop interface, object-oriented game logic, and bitmap-based level loading.
 
-## Project Overview
+Cache Noisettes roughly translates to *Hide the Nuts*. In this single-player puzzle, squirrels slide around a **4 × 4 board** to drop their nuts into holes.
 
-This assignment is to create a **Java Swing** based interactive puzzle game called **Cache Noisettes** using **Java** and **Swing**.
+![Physical Cache Noisettes board game, from the course project materials](assets/readme/readme-realGameRepresentation.png)
 
-Cache Noisettes is a **single player** French game that roughly translates to *Hide the Nuts*. The game involves placing a number of squirrel pieces on a **4x4 grid**, and sliding them (following specific rules) such that they each drop the nut they are carrying into a hole in the gameboard. The squirrel pieces have a tendency to cover the holes.
+## Features
 
-## How to Compile and Run Cache Noisette
+- A graphical board with four squirrel colours, flower obstacles, and fixed holes.
+- Click-to-select squirrels and on-screen directional movement buttons.
+- Collision and board-boundary checks, automatic nut dropping, and a victory popup when every nut is collected.
+- A level selection menu populated from the bundled bitmap files: level 1 and level 10.
+- Restarting the active level and loading custom bitmap levels through a file picker.
+- Image loading and rotation using the supplied `Picture` helper.
 
-Compiling and running this program is fairly straight forward. Simply follow the following steps:
-1. Download the program files by either cloning or installing the ZIP.
-    - If you installed using .ZIP, you will need to extract all files.
-2. Open a terminal and navigate to **cacheNoisetteGame folder** with the Java scripts.
-    - Navigation can be done via the command ```cd <folder path>```
-3. Once you navigate to **cacheNoisetteGame** folder run the following command ```javac *.java && java Driver```
-    - This command will compile and run the program at the same time.
-    
-### Image Representation
-![Image taken from Part-I Summer Project](assets/readme/readme-realGameRepresentation.png)
+## Building and running
 
-## Game Rules
-The rules of the game are simple:
-- The game board consists of a 4x4 grid of empty spaces.
-- The holes are in four of those spaces. They are always in the same space.
-    - ![An empty cache noisette board](assets/readme/readme-codedGameHoleLocations.png)<br />*An empty cache noisette board*
-- There are game pieces that look like squirrels. Up to four squirrel pieces may be placed on the board, each has its own colour and shape. At the start of the game each squirrel carries a nut. The nut resides on the same square as the squirrel’s head.
-- There are many levels to the game (sixty levels in the full game!). Each level defines which of the squirrel pieces are in use for that level, their starting position on the board, and the rotation of the pieces (a squirrel may face up, down, left or right on the board). Once placed at the start of the game, the rotation of the pieces cannot be changed.
-part of a squirrel may be moved into a space that is occupied by another piece (such as another squirrel or a flower). Any part of a squirrel may however move onto a hole.
-- If the part of a squirrel holding a nut moves over a hole, the nut drops into that hole. A hole may only hold at most one nut and cannot be removed.
-- The game is won when every nut is placed into a hole.
+You need a **JDK 8 or newer** and a graphical desktop environment. The project uses Java's standard **Swing**, **AWT**, and **ImageIO** libraries, with no external dependencies or build tool.
 
-![codedGameSquirrelsFace](assets/readme/readme-codedGameSquirrelsFaces.png)
-*The squirrels in the game, facing up, left, right and down respectively. Note the Grey and Red squirrels are straight and occupy two board spaces, but the Brown and Black squirrel pieces are ‘L’ shaped and occupy three spaces.*
-## Resources
-The resources used were cloned from a different repository. They were provided to us in addition to a class **Picture** which loads an image and can rotate the graphics for us. The repository was:
+From the repository root, compile and launch the game:
+
+```sh
+javac *.java
+java Driver
 ```
-git clone https://scc-source.lancs.ac.uk/scc.Y1/scc.111/cachenoisettes-dist.git
-```
-These graphics may be changed later on.
 
+Keep the repository root as the working directory so relative paths to `assets/` resolve correctly. In an IDE, open the folder as a Java project, select a JDK, and use `Driver.main()` as the entry point.
+
+## How to play
+
+1. Choose **Click to Play** to start level 1, or choose a level from **Select Level**.
+2. Click a squirrel on the board to select it.
+3. Use the arrow buttons below the board to move it one square at a time. Moves that overlap another piece or leave the board are rejected.
+4. Move each Squirrel's head over an empty hole to drop its nut. Collect every Squirrel's nut to trigger the victory pop-up.
+5. Use **Select Level → Restart Level** to reset the puzzle, or **Load Custom Level...** to open a compatible `.bmp` file.
+
+## Game rules
+
+- Each level starts with up to four squirrels and any flower obstacles on a 4 × 4 board. Four holes occupy fixed board spaces.
+- Each Squirrel begins with a nut on the square occupied by its head. Grey and red squirrels occupy two squares; brown and black squirrels occupy three in an L shape.
+- Squirrels slide horizontally or vertically without changing their starting orientation. They cannot overlap with other squirrels or flowers.
+- Pieces can move over holes. When a squirrel carrying a nut moves its head over an empty hole, the nut drops into it.
+- Each hole holds at most one nut, and deposited nuts cannot be removed. Place every nut into a hole to win.
+
+![Board showing the fixed hole locations](assets/readme/readme-codedGameHoleLocations.png)
+
+![Squirrel pieces facing up, left, right, and down](assets/readme/readme-codedGameSquirrelsFaces.png)
+
+## Level files
+
+Levels are encoded as **15 × 15-pixel bitmap images**, with coloured cells indicating squirrel positions, orientations, and flowers. `FileManager` reads the bitmap bytes, and `LevelController` converts the pixel data into game pieces. The fixed holes are loaded from `assets/levels/blankWithHoles.bmp`.
+
+Custom levels must follow the format of the supplied files, including their 24-bit BMP layout; arbitrary images are not supported. Files named `level<number>.bmp` in `assets/levels/` are discovered by the level menu when the application starts. Other compatible files can be opened through **Load Custom Level...**.
+
+## Project structure
+
+| Path | Purpose |
+| --- | --- |
+| `Driver.java` | Application entry point, main window setup, and controller connections. |
+| `GameBoard.java` | Board display, piece selection and placement, and nut dropping. |
+| `GamePiece.java` | Abstract base class defining the shared interface for board pieces. |
+| `Squirrel.java` | Squirrel shapes, graphics, movement, collision checks, and carried nuts. |
+| `Flower.java` | Flower obstacles that block movement. |
+| `Hole.java` | Walkable holes and their stored nuts. |
+| `Direction.java` | Direction values and associated image rotations. |
+| `MovementButton.java` | Arrow buttons that move the selected Squirrel. |
+| `LevelController.java` | Level loading, restarting, custom file selection, and win detection. |
+| `MenuController.java` | Main menu, level selection menu, and popup windows. |
+| `FileManager.java` | Reads the supplied bitmap format into a `BufferedImage`. |
+| `Picture.java` | Supplied image loading and rotation helper. |
+| `assets/icons/` | Squirrel, flower, hole, nut, and arrow graphics. |
+| `assets/levels/` | Bundled bitmap levels and the fixed-hole board template. |
+| `assets/readme/` | Illustrations used in this README. |
+
+## Credits
+
+The graphics and `Picture` helper were supplied with the SCC111 coursework materials through the course distribution repository:
+
+```text
+https://scc-source.lancs.ac.uk/scc.Y1/scc.111/cachenoisettes-dist.git
+```
+
+The game illustrations above come from the course's Part I Summer Project materials.
